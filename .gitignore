@@ -1,0 +1,95 @@
+# OS & IDE
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+.vscode/settings.json
+.idea/
+*.user
+*.suo
+*.iml
+
+# Node.js / npm
+node_modules/
+npm-debug.log
+yarn.lock
+package-lock.json
+pnpm-lock.yaml
+dist/
+build/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.pytest_cache/
+*.egg-info/
+
+# .NET / C#
+bin/
+obj/
+*.dll
+*.exe
+
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+*.p12
+
+# Temporary files
+*.log
+*.bak
+*.swp
+*~
+
+# Power Platform / Dynamics 365
+# (Solutions are typically exported as XML; store them in source control)
+# Exclude local flow test artifacts:
+.powerplatform/
+*.pcapx  # Power Automate export (if any local testing)
+SolutionPackager/
+bin/
+obj/
+
+# Azure & Bicep/Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+terraform.tfvars
+local.tfvars
+.terraform.lock.hcl
+
+# Documentation artifacts (temporary)
+*.tmp.md
+
+# Coverage & Test reports
+coverage/
+.coverage
+htmlcov/
+test-results/
+
+# IDE specific
+.vscode/extensions
+.vscode/settings.json.bak
+.vscode/launch.json
+
+# Certs/Keys (security)
+**/*.crt
+**/*.key
+**/*.pfx
+**/*.pem
+
+# OneDrive temp files (if working from OneDrive)
+~$*
+.~*
+
+# Build outputs
+dist/
+build/
+output/
+out/
