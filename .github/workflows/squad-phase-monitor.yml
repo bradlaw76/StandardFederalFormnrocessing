@@ -1,0 +1,184 @@
+name: Squad Phase Monitor
+
+on:
+  schedule:
+    # Check every 10 minutes
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+    inputs:
+      phase:
+        description: 'Phase to monitor'
+        required: true
+        default: '1'
+        type: choice
+        options:
+          - '1'
+          - '2'
+          - '3'
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  monitor-phase:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up GitHub CLI
+        run: |
+          gh --version
+          gh auth status
+
+      - name: Check Phase 1 Status
+        if: github.event.inputs.phase == '1' || github.event_name == 'schedule'
+        id: phase1
+        run: |
+          CLOSED=$(gh issue list --state closed --label "squad" --json number | jq '[.[] | select(.number >= 3 and .number <= 10)] | length')
+          OPEN=$(gh issue list --state open --label "squad" --json number | jq '[.[] | select(.number >= 3 and .number <= 10)] | length')
+          TOTAL=8
+          
+          echo "closed=$CLOSED" >> $GITHUB_OUTPUT
+          echo "open=$OPEN" >> $GITHUB_OUTPUT
+          echo "total=$TOTAL" >> $GITHUB_OUTPUT
+          
+          if [ "$CLOSED" -eq "$TOTAL" ]; then
+            echo "complete=true" >> $GITHUB_OUTPUT
+          else
+            echo "complete=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Report Phase 1 Progress
+        run: |
+          CLOSED=${{ steps.phase1.outputs.closed }}
+          OPEN=${{ steps.phase1.outputs.open }}
+          TOTAL=${{ steps.phase1.outputs.total }}
+          
+          echo "## 📊 Phase 1 Status" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Closed | $CLOSED / $TOTAL |" >> $GITHUB_STEP_SUMMARY
+          echo "| Open | $OPEN |" >> $GITHUB_STEP_SUMMARY
+          echo "| Progress | $(($CLOSED * 100 / $TOTAL))% |" >> $GITHUB_STEP_SUMMARY
+          echo "| Status | $([[ '${{ steps.phase1.outputs.complete }}' == 'true' ]] && echo '✅ COMPLETE' || echo '⏳ In Progress') |" >> $GITHUB_STEP_SUMMARY
+
+      - name: Check if Phase 1 Complete
+        if: steps.phase1.outputs.complete == 'true'
+        run: |
+          echo "🎉 PHASE 1 COMPLETE!"
+          echo "All 8 infrastructure issues are closed."
+
+      - name: Update Focus to Phase 2 (if complete)
+        if: steps.phase1.outputs.complete == 'true'
+        run: |
+          # Update .squad/identity/now.md
+          cat > .squad/identity/now.md << 'EOF'
+          ---
+          updated_at: $(date -Iseconds)
+          focus_area: Phase 2 Schema & AI Data Prep
+          phase: 2
+          status: active
+          active_issues: [11, 12, 13, 14, 15, 16, 17, 18]
+          ---
+          
+          # 🚀 Phase 2 ACTIVE — Schema & Data Prep
+          
+          **Status**: 🔴 LIVE  
+          **Duration**: 6–8 hours  
+          **Lead**: Tommy Shelby
+          
+          Phase 1 checkpoint: ✅ PASSED
+          
+          ## Phase 2 Streams:
+          
+          ### Stream A: Dataverse Schema (Polly Gray)
+          - #11–#15: Table designs
+          
+          ### Stream B: AI Data & Flow (Michael + John)
+          - #16–#18: Training data + flow architecture
+          
+          See Discussion #51 for full briefing.
+          EOF
+          
+          git config user.name "Squad Monitor"
+          git config user.email "squad@github.local"
+          git add .squad/identity/now.md
+          git commit -m "chore: activate Phase 2 after Phase 1 complete
+
+Phase 1 checkpoint passed. All 8 infrastructure tasks closed.
+Activating Phase 2: Schema design + AI data prep (parallel streams)."
+          git push
+
+      - name: Create Issue Comment (if complete)
+        if: steps.phase1.outputs.complete == 'true'
+        run: |
+          gh issue comment 1 --body "## ✅ Phase 1 Complete — Phase 2 Activated
+
+**Time**: $(date)
+
+All 8 Phase 1 infrastructure tasks are CLOSED:
+- ✅ #3–#10: Complete
+
+**Phase 2 Now Active**:
+- 📊 Polly Gray: #11–#15 (schema design)
+- 🔹 Michael Gray: #16–#17 (AI data prep)
+- 🔹 John Shelby: #18 (flow architecture)
+
+See Discussion #51 for Phase 2 briefing.
+Team can proceed to Phase 2 immediately."
+
+      - name: Notify on Slack (Optional)
+        if: steps.phase1.outputs.complete == 'true' && secrets.SLACK_WEBHOOK
+        uses: slackapi/slack-github-action@v1
+        with:
+          webhook-url: ${{ secrets.SLACK_WEBHOOK }}
+          payload: |
+            {
+              "text": "🎉 Phase 1 Complete!",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "✅ **Phase 1 Infrastructure Setup Complete**\n\nAll 8 tasks closed. Phase 2 (Schema & Data Prep) now active.\n\nTeam: Check GitHub for Phase 2 assignments (#11–#18)."
+                  }
+                }
+              ]
+            }
+
+  monitor-phase-2:
+    runs-on: ubuntu-latest
+    if: github.event.inputs.phase == '2'
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Check Phase 2 Status
+        id: phase2
+        run: |
+          CLOSED=$(gh issue list --state closed --label "squad" --json number | jq '[.[] | select(.number >= 11 and .number <= 18)] | length')
+          OPEN=$(gh issue list --state open --label "squad" --json number | jq '[.[] | select(.number >= 11 and .number <= 18)] | length')
+          TOTAL=8
+          
+          echo "closed=$CLOSED" >> $GITHUB_OUTPUT
+          echo "open=$OPEN" >> $GITHUB_OUTPUT
+          echo "total=$TOTAL" >> $GITHUB_OUTPUT
+          
+          if [ "$CLOSED" -eq "$TOTAL" ]; then
+            echo "complete=true" >> $GITHUB_OUTPUT
+          else
+            echo "complete=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Report Phase 2 Progress
+        run: |
+          echo "## 📊 Phase 2 Status" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Closed | ${{ steps.phase2.outputs.closed }} / ${{ steps.phase2.outputs.total }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Open | ${{ steps.phase2.outputs.open }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Status | $([[ '${{ steps.phase2.outputs.complete }}' == 'true' ]] && echo '✅ COMPLETE' || echo '⏳ In Progress') |" >> $GITHUB_STEP_SUMMARY
