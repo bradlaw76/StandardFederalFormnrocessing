@@ -1,0 +1,51 @@
+TABLE: Audit Log
+Schema Name: vafe_AuditLog
+Display Name: Audit Log (Plural: Audit Logs)
+Owner: User-owned
+Description: Immutable compliance audit trail (HIPAA/VA)
+
+FIELDS TO ADD:
+1. FormSubmissionId [REQUIRED - LOOKUP]
+   - Type: Lookup
+   - Related Table: Form Submission
+   - Schema: vafe_formsubmissionid
+
+2. Action
+   - Type: Choice
+   - Options: Create | Read | Update | Delete
+   - Schema: vafe_action
+
+3. Timestamp
+   - Type: DateTime
+   - Default: Now
+   - Schema: vafe_timestamp
+
+4. UserId
+   - Type: Single line of text
+   - Max Length: 255
+   - Schema: vafe_userid
+
+5. IPAddress
+   - Type: Single line of text
+   - Max Length: 45
+   - Schema: vafe_ipaddress
+
+6. Details
+   - Type: Multi-line text
+   - Max Length: 2000
+   - Schema: vafe_details
+
+7. ErrorCode
+   - Type: Single line of text
+   - Max Length: 50
+   - Schema: vafe_errorcode
+
+8. Severity
+   - Type: Choice
+   - Options: Info | Warning | Error | Critical
+   - Schema: vafe_severity
+
+9. CorrelationId
+   - Type: Single line of text
+   - Max Length: 100
+   - Schema: vafe_correlationid

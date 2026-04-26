@@ -1,0 +1,29 @@
+RELATIONSHIPS TO CREATE (After all tables exist):
+
+1. Form Submission → Extraction Result (1:N)
+   - Parent: Form Submission
+   - Child: Extraction Result
+   - Relationship Name: FormSubmission_ExtractionResult
+   - Foreign Key: FormSubmissionId
+   - Cascade Delete: YES
+
+2. Form Submission → Audit Log (1:N)
+   - Parent: Form Submission
+   - Child: Audit Log
+   - Relationship Name: FormSubmission_AuditLog
+   - Foreign Key: FormSubmissionId
+   - Cascade Delete: YES
+
+3. Form Submission → D365 Write Event (1:N)
+   - Parent: Form Submission
+   - Child: D365 Write Event
+   - Relationship Name: FormSubmission_D365WriteEvent
+   - Foreign Key: FormSubmissionId
+   - Cascade Delete: YES
+
+4. Extraction Result → Correction Record (1:N)
+   - Parent: Extraction Result
+   - Child: Correction Record
+   - Relationship Name: ExtractionResult_CorrectionRecord
+   - Foreign Key: ExtractionResultId
+   - Cascade Delete: YES
