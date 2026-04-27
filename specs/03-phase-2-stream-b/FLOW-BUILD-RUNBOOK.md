@@ -492,9 +492,10 @@ Build this last. It calls all subflows built above.
 **Navigation**: VA-Form-Extraction solution → **+ New** → **Automated cloud flow**  
 **Name**: `VA-Form-Intake-Pipeline`  
 **Trigger**: SharePoint — **When a file is created or modified (properties only)**
-- Site: `https://uspsgcctenant.sharepoint.com/sites/DpartementofVeteranAffairs`
+- Site: `https://d365demotsce80677168.sharepoint.com/sites/DepartmentofVeteranAffairs`
 - Library: `FormIntake`
 - Folder: `/` *(root)*
+- Trigger condition: `@startsWith(triggerOutputs()?['body/{FilenameWithExtension}'], 'VA-10-3542-')`
 
 ### STEP 1 — Initialize Variables
 
@@ -581,7 +582,7 @@ All actions in Steps 6a through 9 below go **inside** this Scope action.
 #### STEP 6b — Get File Content
 
 **Action**: Get file content (SharePoint)
-- Site: `https://uspsgcctenant.sharepoint.com/sites/DpartementofVeteranAffairs`
+- Site: `https://d365demotsce80677168.sharepoint.com/sites/DepartmentofVeteranAffairs`
 - File identifier: `triggerOutputs()?['body/{Id}']`
 
 **Action**: Set variable

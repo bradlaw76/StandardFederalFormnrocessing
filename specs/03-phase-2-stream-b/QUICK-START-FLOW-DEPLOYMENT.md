@@ -62,12 +62,12 @@ This checklist guides **Tommy Shelby** and the deployment team through provision
     ```
 
 - [ ] **Verify SharePoint FormIntake Library Exists**
-  - Site: VA-Form-Extraction
+  - Site: Department of Veteran Affairs (`/sites/DepartmentofVeteranAffairs`)
   - Library: FormIntake (document set)
   - Accessible: Yes
   - Command:
     ```powershell
-    Connect-PnPOnline -Url "https://tenantname.sharepoint.com/sites/va-form-extraction"
+    Connect-PnPOnline -Url "https://d365demotsce80677168.sharepoint.com/sites/DepartmentofVeteranAffairs"
     Get-PnPList | Where-Object { $_.Title -eq "FormIntake" }
     ```
 
@@ -127,7 +127,7 @@ This checklist guides **Tommy Shelby** and the deployment team through provision
   - Command:
     ```powershell
     $secrets = @{
-      "SharePointSiteUrl" = "https://tenantname.sharepoint.com/sites/va-form-extraction"
+      "SharePointSiteUrl" = "https://d365demotsce80677168.sharepoint.com/sites/DepartmentofVeteranAffairs"
       "DataverseEnvironmentUrl" = "https://va-form-extraction.crm.dynamics.com"
       "AIBuilderModelId" = "$(model-id-from-michael)"
       "D365InstanceUrl" = "https://va-form-extraction.crm.dynamics.com"
@@ -201,9 +201,9 @@ All Power Automate connections pre-created & tested:
   ```
 
 - [ ] **Configure Trigger**
-  - Site: VA-Form-Extraction
+  - Site: Department of Veteran Affairs (`https://d365demotsce80677168.sharepoint.com/sites/DepartmentofVeteranAffairs`)
   - Library: FormIntake
-  - Filter: "File name starts with vafe_"
+  - Filter: "File name starts with VA-10-3542-"
   - Frequency: Every 1 minute
 
 - [ ] **Implement Step 1: Validate & Parse Input File**
@@ -763,7 +763,7 @@ All Power Automate connections pre-created & tested:
 | D365 Instance | https://va-form-extraction.crm.dynamics.com |
 | Dataverse Admin | https://admin.poweraplatform.com |
 | Azure Key Vault | https://va-form-kv.vault.azure.net |
-| SharePoint FormIntake | https://tenantname.sharepoint.com/sites/va-form-extraction/FormIntake |
+| SharePoint FormIntake | https://d365demotsce80677168.sharepoint.com/sites/DepartmentofVeteranAffairs/FormIntake |
 
 ### Key Documents
 

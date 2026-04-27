@@ -17,7 +17,7 @@
 # Step 1: Create SharePoint site connection
 # In Power Automate designer:
 # - Add action: "When a file is created or modified"
-# - Select: VA-Form-Extraction site
+# - Select: Department of Veteran Affairs site
 # - Select: FormIntake library
 # - Click "Sign in" → authenticate with service account
 ```
@@ -26,9 +26,9 @@
 
 | Setting | Value | Notes |
 |---------|-------|-------|
-| **Site URL** | `https://tenantname.sharepoint.com/sites/va-form-extraction` | D365-integrated site |
+| **Site URL** | `https://d365demotsce80677168.sharepoint.com/sites/DepartmentofVeteranAffairs` | D365-integrated site |
 | **Library** | FormIntake | Document set for form uploads |
-| **Filter** | File name starts with `vafe_` | Naming convention |
+| **Filter** | File name starts with `VA-10-3542-` | Intake naming convention |
 | **Trigger Frequency** | Every 1 minute | Check for new files |
 | **Scope** | Organization-level | All users can upload |
 
@@ -49,7 +49,7 @@
 #### Connection String (For Key Vault)
 
 ```
-SharePointSiteUrl=https://tenantname.sharepoint.com/sites/va-form-extraction
+SharePointSiteUrl=https://d365demotsce80677168.sharepoint.com/sites/DepartmentofVeteranAffairs
 SharePointLibraryName=FormIntake
 ```
 
@@ -494,7 +494,7 @@ All connection strings stored in Azure Key Vault (NOT in flow definitions):
 # Example Key Vault secrets:
 az keyvault secret set --vault-name va-form-kv \
   --name "SharePointSiteUrl" \
-  --value "https://tenantname.sharepoint.com/sites/va-form-extraction"
+  --value "https://d365demotsce80677168.sharepoint.com/sites/DepartmentofVeteranAffairs"
 
 az keyvault secret set --vault-name va-form-kv \
   --name "D365InstanceUrl" \
@@ -541,7 +541,7 @@ In Power Automate cloud portal:
 # PowerShell script to test connectors:
 
 # Test SharePoint
-$siteUrl = "https://tenantname.sharepoint.com/sites/va-form-extraction"
+$siteUrl = "https://d365demotsce80677168.sharepoint.com/sites/DepartmentofVeteranAffairs"
 $site = Connect-PnPOnline -Url $siteUrl -Interactive
 Get-PnPList | Where-Object { $_.Title -eq "FormIntake" }
 
