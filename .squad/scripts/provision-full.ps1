@@ -233,6 +233,24 @@ Write-Host "🔧 Step 5: Adding fields to tables..."
 Write-Host "   (Each field call is separate — this takes ~30-60s total)"
 Write-Host ""
 
+# Wait for any background PublishAll to clear before adding fields
+Write-Host "   ⏳ Checking for background publish jobs..."
+$retries = 0
+do {
+    Start-Sleep -Seconds 5
+    $retries++
+    try {
+        # Probe with a harmless metadata read; if PublishAll is running, schema ops throw
+        Invoke-DataverseApi GET "EntityDefinitions(LogicalName='vafe_formsubmission')?`$select=LogicalName" | Out-Null
+        $publishClear = $true
+    } catch {
+        $publishClear = $false
+        Write-Host "   ⏳ Environment still busy ($retries/12)..."
+    }
+} while (-not $publishClear -and $retries -lt 12)
+Write-Host "   ✅ Environment ready"
+Write-Host ""
+
 function Add-TextField($tableLogicalName, $schemaName, $displayName, $maxLength = 255, $required = $false) {
     $req = if ($required) { "Required" } else { "None" }
     $fieldDef = @{
@@ -420,6 +438,14 @@ Write-Host "🔗 Step 6: Creating relationships..."
 Write-Host ""
 
 function New-LookupRelationship($primaryTable, $relatedTable, $navPropSchema, $displayName) {
+    # Check if relationship already exists
+    $schemaName = "${primaryTable}_${relatedTable}"
+    try {
+        $existing = Invoke-DataverseApi GET "RelationshipDefinitions(SchemaName='$schemaName')?`$select=SchemaName"
+        Write-Host "   ⚠️  Already exists — skipping ($schemaName)"
+        return
+    } catch { <# expected 404 if not present — fall through to create #> }
+
     $relDef = @{
         "@odata.type"         = "Microsoft.Dynamics.CRM.OneToManyRelationshipMetadata"
         SchemaName            = "${primaryTable}_${relatedTable}"
