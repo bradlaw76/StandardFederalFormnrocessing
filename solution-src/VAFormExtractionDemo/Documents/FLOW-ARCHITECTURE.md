@@ -44,7 +44,7 @@ SharePoint (file upload)
 | Property | Value |
 |----------|-------|
 | Trigger | SharePoint — When a file is created in a folder |
-| Site | Contact Center SharePoint (to be configured) |
+| Site | https://d365demotsce80677168.sharepoint.com/sites/DepartmentofVeteranAffairs |
 | Library | `FormIntake` |
 | Filter | File name matches pattern: `VA-10-3542-*.pdf` |
 
@@ -135,7 +135,7 @@ SharePoint (file upload)
 ```
 CONFIDENCE_ACCEPT_THRESHOLD = 0.80
 CONFIDENCE_FLAG_THRESHOLD = 0.60
-SHAREPOINT_SITE_URL = https://[tenant].sharepoint.com/sites/ContactCenter
+SHAREPOINT_SITE_URL = https://d365demotsce80677168.sharepoint.com/sites/DepartmentofVeteranAffairs
 SHAREPOINT_LIBRARY = FormIntake
 D365_ENVIRONMENT_URL = https://healthconnectcenter.crm.dynamics.com
 ALERT_EMAIL = admin@D365DemoTSCE80677168.onmicrosoft.com
@@ -148,7 +148,7 @@ Every form submission gets a GUID correlation ID set in Flow 1. All AuditLog ent
 
 ## Error Handling & Dead-Letter Queue (Issue #33)
 
-**Dead-letter queue:** SharePoint list `FormIntakeErrors` with columns:
+**Dead-letter queue:** SharePoint folder `FormIntake/FormIntakeErrors` (or list `FormIntakeErrors`) with columns/metadata:
 - `CorrelationId`, `FormFileName`, `FailureStage` (Intake/Extraction/D365Write), `ErrorMessage`, `Timestamp`, `RetryCount`, `Status` (Open/Resolved)
 
 **Retry strategy:**

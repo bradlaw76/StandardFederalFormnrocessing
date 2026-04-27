@@ -55,9 +55,9 @@ TransportationMode: Regular / Ambulance / Chair Car
 
 ## Step 3 — Upload to SharePoint
 
-**Target location:** Contact Center SharePoint site → `FormIntake` library
+**Target location:** `https://d365demotsce80677168.sharepoint.com/sites/DepartmentofVeteranAffairs` → `FormIntake` library
 
-1. Go to your SharePoint site
+1. Go to: `https://d365demotsce80677168.sharepoint.com/sites/DepartmentofVeteranAffairs`
 2. Navigate to `FormIntake` document library (create it if it doesn't exist)
 3. Create folder: `AITrainingData/`
 4. Upload all 5–10 sample PDFs into `AITrainingData/`
