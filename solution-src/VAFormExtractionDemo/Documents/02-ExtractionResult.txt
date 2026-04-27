@@ -1,0 +1,46 @@
+TABLE: Extraction Result
+Schema Name: vafe_ExtractionResult
+Display Name: Extraction Result (Plural: Extraction Results)
+Owner: User-owned
+Description: Stores AI-extracted field data and confidence scores
+
+FIELDS TO ADD:
+1. FormSubmissionId [REQUIRED - LOOKUP]
+   - Type: Lookup
+   - Related Table: Form Submission
+   - Schema: vafe_formsubmissionid
+
+2. ExtractedData
+   - Type: Multi-line text
+   - Max Length: 5000
+   - Schema: vafe_extracteddata
+
+3. FieldConfidenceScores
+   - Type: Multi-line text
+   - Max Length: 5000
+   - Schema: vafe_fieldconfidencescores
+
+4. OverallConfidence
+   - Type: Decimal
+   - Decimal Places: 5
+   - Min: 0, Max: 1
+   - Schema: vafe_overallconfidence
+
+5. ExtractionStatus
+   - Type: Choice
+   - Options: Success | PartialSuccess | Failed
+   - Schema: vafe_extractionstatus
+
+6. ModelVersion
+   - Type: Single line of text
+   - Max Length: 100
+   - Schema: vafe_modelversion
+
+7. ExtractionTimestamp
+   - Type: DateTime
+   - Schema: vafe_extractiontimestamp
+
+8. ErrorMessage
+   - Type: Multi-line text
+   - Max Length: 2000
+   - Schema: vafe_errormessage
