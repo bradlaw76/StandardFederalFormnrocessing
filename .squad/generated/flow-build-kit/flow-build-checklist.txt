@@ -1,0 +1,22 @@
+VA Form Extraction — Flow Build Checklist
+Generated: 2026-04-28 12:38:43Z
+
+Preflight
+- [ ] Model published: VAFE-VA10-3542-DocProc-v1
+- [ ] SharePoint site reachable: https://d365demotsce80677168.sharepoint.com/sites/DepartmentofVeteranAffairs
+- [ ] Library exists: FormIntake
+- [ ] Dataverse tables ready: formsubmission, extractionresult, correctionrecord, auditlog, d365writeevent
+
+Build Order
+1. [ ] VAFE-Flow-01-SharePointIntake
+2. [ ] VAFE-Flow-02-AIExtraction
+3. [ ] VAFE-Flow-03-DecisionRouting
+4. [ ] VAFE-Flow-04-D365Write
+5. [ ] VAFE-Flow-05-ErrorHandling
+
+Validation
+- [ ] Good sample auto-routes to D365 write
+- [ ] Medium confidence routes to manual review
+- [ ] Low confidence routes to failure queue
+- [ ] Audit log entry exists for each stage
+- [ ] D365 write events include retry metadata

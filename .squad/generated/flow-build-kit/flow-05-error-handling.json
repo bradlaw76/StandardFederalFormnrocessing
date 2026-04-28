@@ -1,0 +1,67 @@
+{
+  "name": "VAFE-Flow-05-ErrorHandling",
+  "type": "scheduled",
+  "trigger": {
+    "connector": "recurrence",
+    "operation": "Recurrence",
+    "frequency": "Minute",
+    "interval": 15
+  },
+  "actions": [
+    {
+      "step": 1,
+      "name": "List_Failed_D365WriteEvents",
+      "connector": "dataverse",
+      "operation": "List rows",
+      "table": "vafe_d365writeevent",
+      "filterRows": "vafe_status eq 'Failed' and vafe_retry_count lt 3"
+    },
+    {
+      "step": 2,
+      "name": "Apply_to_each_FailedEvent",
+      "connector": "control",
+      "operation": "Apply to each",
+      "items": "@{outputs('List_Failed_D365WriteEvents')?['body/value']}"
+    },
+    {
+      "step": 3,
+      "name": "Increment_RetryCount",
+      "connector": "dataverse",
+      "operation": "Update a row",
+      "table": "vafe_d365writeevent",
+      "rowId": "@{items('Apply_to_each_FailedEvent')?['vafe_d365writeeventid']}",
+      "columns": {
+        "vafe_retry_count": "@{add(int(items('Apply_to_each_FailedEvent')?['vafe_retry_count']), 1)}",
+        "vafe_last_retry_date": "@{utcNow()}"
+      }
+    },
+    {
+      "step": 4,
+      "name": "Run_Child_Flow_D365Write_Retry",
+      "connector": "flow",
+      "operation": "Run a Child Flow",
+      "targetFlow": "VAFE-Flow-04-D365Write",
+      "inputs": {
+        "FormSubmissionId": "@{items('Apply_to_each_FailedEvent')?['_vafe_form_submission_value']}",
+        "ExtractionResultId": "@{items('Apply_to_each_FailedEvent')?['_vafe_extraction_result_value']}"
+      }
+    },
+    {
+      "step": 5,
+      "name": "Escalate_MaxRetry_Reached",
+      "connector": "condition",
+      "operation": "Condition",
+      "expression": "@greaterOrEquals(int(items('Apply_to_each_FailedEvent')?['vafe_retry_count']), 3)",
+      "trueActions": [
+        "Update FormSubmission status to ManualReview",
+        "Create CorrectionRecord reason='D365WriteMaxRetryExceeded'",
+        "Create AuditLog event='D365WriteEscalated'"
+      ]
+    }
+  ],
+  "successCriteria": [
+    "Failed write events are retried up to max 3",
+    "Events exceeding retry limit are escalated to manual review",
+    "All retry and escalation activity is auditable"
+  ]
+}

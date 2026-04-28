@@ -1,0 +1,63 @@
+{
+  "name": "VAFE-Flow-03-DecisionRouting",
+  "type": "child",
+  "trigger": {
+    "connector": "flow",
+    "operation": "Manually trigger a flow (child)",
+    "inputs": [
+      "FormSubmissionId",
+      "ExtractionResultId",
+      "OverallConfidence"
+    ]
+  },
+  "thresholds": {
+    "autoApprove": 0.95,
+    "manualReview": 0.80
+  },
+  "conditions": [
+    {
+      "name": "AutoApprove",
+      "expression": "@greaterOrEquals(float(triggerBody()?['OverallConfidence']), 0.95)",
+      "actions": [
+        "Update FormSubmission status to ReadyForD365Write",
+        "Run child flow VAFE-Flow-04-D365Write"
+      ]
+    },
+    {
+      "name": "ManualReview",
+      "expression": "@and(greaterOrEquals(float(triggerBody()?['OverallConfidence']), 0.80), less(float(triggerBody()?['OverallConfidence']), 0.95))",
+      "actions": [
+        "Update FormSubmission status to ManualReview",
+        "Create CorrectionRecord placeholder",
+        "Create AuditLog event ManualReviewQueued"
+      ]
+    },
+    {
+      "name": "LowConfidenceFailure",
+      "expression": "@less(float(triggerBody()?['OverallConfidence']), 0.80)",
+      "actions": [
+        "Update FormSubmission status to Failed",
+        "Run child flow VAFE-Flow-05-ErrorHandling",
+        "Create AuditLog event ExtractionLowConfidence"
+      ]
+    }
+  ],
+  "dataverseUpdates": {
+    "formsubmission": {
+      "table": "vafe_formsubmission",
+      "idColumn": "vafe_formsubmissionid",
+      "statusColumn": "vafe_status"
+    },
+    "correctionrecord": {
+      "table": "vafe_correctionrecord",
+      "columns": [
+        "vafe_extraction_result@odata.bind",
+        "vafe_field_name",
+        "vafe_original_value",
+        "vafe_confidence_before",
+        "vafe_status",
+        "vafe_reason"
+      ]
+    }
+  }
+}

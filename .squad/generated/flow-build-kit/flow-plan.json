@@ -1,0 +1,122 @@
+{
+  "modelName": "VAFE-VA10-3542-DocProc-v1",
+  "flows": [
+    {
+      "outputs": [
+        "FormSubmissionId",
+        "SharePointFileId",
+        "FileContent"
+      ],
+      "trigger": "SharePoint.WhenFileCreated",
+      "name": "VAFE-Flow-01-SharePointIntake",
+      "actions": [
+        "Initialize variables: FormId, FileName, FileUrl, SubmittedUtc",
+        "Dataverse Add row: vafe_formsubmission (Status=Intake)",
+        "Dataverse Add row: vafe_auditlog (Event=FileValidated)",
+        "Run child flow: VAFE-Flow-02-AIExtraction"
+      ],
+      "type": "Automated cloud flow",
+      "order": 1,
+      "triggerConfig": {
+        "triggerCondition": "@startsWith(triggerOutputs()?['body/{FilenameWithExtension}'], 'VA-10-3542-')",
+        "site": "https://d365demotsce80677168.sharepoint.com/sites/DepartmentofVeteranAffairs",
+        "library": "FormIntake"
+      }
+    },
+    {
+      "outputs": [
+        "ExtractionResultId",
+        "OverallConfidence"
+      ],
+      "trigger": "Flow.RunChildFlow",
+      "name": "VAFE-Flow-02-AIExtraction",
+      "actions": [
+        "SharePoint Get file content",
+        "AI Builder Predict using model 'VAFE-VA10-3542-DocProc-v1'",
+        "Transform extracted fields + confidence to JSON",
+        "Dataverse Add row: vafe_extractionresult",
+        "Run child flow: VAFE-Flow-03-DecisionRouting"
+      ],
+      "childInputs": [
+        "FormSubmissionId",
+        "SharePointFileId"
+      ],
+      "type": "Instant cloud flow (child)",
+      "order": 2
+    },
+    {
+      "actions": [
+        "Dataverse Update row: vafe_formsubmission status",
+        "On ManualReview: create vafe_correctionrecord entries for low-confidence fields",
+        "On ReadyForD365Write: run child flow VAFE-Flow-04-D365Write",
+        "On Failed: run child flow VAFE-Flow-05-ErrorHandling"
+      ],
+      "type": "Instant cloud flow (child)",
+      "order": 3,
+      "childInputs": [
+        "FormSubmissionId",
+        "ExtractionResultId",
+        "OverallConfidence"
+      ],
+      "conditions": [
+        "if OverallConfidence >= 0.95 => ReadyForD365Write",
+        "if OverallConfidence >= 0.8 and < 0.95 => ManualReview",
+        "if OverallConfidence < 0.8 => Failed"
+      ],
+      "trigger": "Flow.RunChildFlow",
+      "outputs": [
+        "FinalRoute"
+      ],
+      "name": "VAFE-Flow-03-DecisionRouting"
+    },
+    {
+      "outputs": [
+        "WriteStatus",
+        "WriteEventId"
+      ],
+      "trigger": "Flow.RunChildFlow",
+      "name": "VAFE-Flow-04-D365Write",
+      "actions": [
+        "Parse extraction JSON",
+        "Map fields to D365/Dataverse schema",
+        "Dataverse Add row: vafe_d365writeevent (Status=Pending)",
+        "Write target records",
+        "Dataverse Update row: vafe_d365writeevent (Success/Failed)",
+        "Dataverse Add row: vafe_auditlog"
+      ],
+      "childInputs": [
+        "FormSubmissionId",
+        "ExtractionResultId"
+      ],
+      "type": "Instant cloud flow (child)",
+      "order": 4
+    },
+    {
+      "outputs": [
+        "RetryCount",
+        "EscalationCount"
+      ],
+      "trigger": "Recurrence.Every15Minutes",
+      "name": "VAFE-Flow-05-ErrorHandling",
+      "actions": [
+        "List failed/pending vafe_d365writeevent rows",
+        "Retry transient failures (max 3)",
+        "Escalate hard failures to manual review queue",
+        "Log all retries/escalations to vafe_auditlog"
+      ],
+      "type": "Scheduled cloud flow",
+      "order": 5
+    }
+  ],
+  "generatedAt": "2026-04-28T12:38:43.7935629-04:00",
+  "solutionName": "VA-Form-Extraction",
+  "thresholds": {
+    "manualReview": 0.8,
+    "autoApprove": 0.95
+  },
+  "sharePoint": {
+    "siteUrl": "https://d365demotsce80677168.sharepoint.com/sites/DepartmentofVeteranAffairs",
+    "library": "FormIntake",
+    "filePrefix": "VA-10-3542-"
+  }
+}
