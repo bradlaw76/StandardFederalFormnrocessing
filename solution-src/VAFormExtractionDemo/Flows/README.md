@@ -2,6 +2,14 @@
 
 This folder contains a build-ready flow blueprint for the VA Form 10-3542 pipeline.
 
+## Program Context (BTS SS)
+
+This project is for VA Beneficiary Travel Self-Service (BTS SS).
+
+- Supports upload and filing of manual claims
+- Supports recording Letters of Attendance for Community Care appointments
+- Uses Power Automate + Dataverse to maintain an auditable claim-processing trail
+
 ## What was created
 
 - `01-VAFE-Flow-SharePointIntake.json`

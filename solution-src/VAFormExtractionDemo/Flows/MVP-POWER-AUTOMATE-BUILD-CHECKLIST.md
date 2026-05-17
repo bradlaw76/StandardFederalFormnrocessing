@@ -7,6 +7,14 @@ This is the fastest implementation path for the simple starter scope:
 - audit logging
 - retry for failed writes
 
+## Program Context (BTS SS)
+
+This solution supports the Department of Veterans Affairs Beneficiary Travel Self-Service (BTS SS) program.
+
+- Business purpose: upload and filing of manual beneficiary travel claims
+- Clinical/operations purpose: recording Letters of Attendance for Community Care appointments
+- Data objective: capture intake artifacts, extract claim content, and persist auditable records in Dataverse/D365
+
 ## 1) Prerequisites
 
 - Environment: open the `VA-Form-Extraction` solution in Power Automate.

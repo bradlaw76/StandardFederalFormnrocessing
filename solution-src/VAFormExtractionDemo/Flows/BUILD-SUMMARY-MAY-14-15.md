@@ -8,6 +8,14 @@ Successfully completed construction and testing of the VA Form 10-3542 extractio
 - **MVP-03**: Comprehensive audit logging
 - **MVP-01**: Automated SharePoint intake orchestration
 
+### Program Context (BTS SS)
+
+This implementation supports the VA Beneficiary Travel Self-Service (BTS SS) process:
+
+- Upload and filing of manual beneficiary travel claims
+- Recording of Letter of Attendance for Community Care appointments
+- End-to-end claim intake traceability via Dataverse and Dynamics 365
+
 **Status**: End-to-end happy path validated; MVP-04 retry flow is next
 
 ---
