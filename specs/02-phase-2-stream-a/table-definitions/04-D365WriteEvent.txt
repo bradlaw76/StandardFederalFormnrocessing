@@ -1,0 +1,49 @@
+TABLE: D365 Write Event
+Schema Name: vafe_D365WriteEvent
+Display Name: D365 Write Event (Plural: D365 Write Events)
+Owner: User-owned
+Description: Tracks synchronization attempts to Dynamics 365 with retry logic
+
+FIELDS TO ADD:
+1. FormSubmissionId [REQUIRED - LOOKUP]
+   - Type: Lookup
+   - Related Table: Form Submission
+   - Schema: vafe_formsubmissionid
+
+2. D365Status
+   - Type: Choice
+   - Options: Pending | Success | Failed | Retrying
+   - Schema: vafe_d365status
+
+3. TimestampWritten
+   - Type: DateTime
+   - Schema: vafe_timestampwritten
+
+4. D365RecordId
+   - Type: Single line of text
+   - Max Length: 100
+   - Schema: vafe_d365recordid
+
+5. RetryCount
+   - Type: Whole number
+   - Min: 0
+   - Schema: vafe_retrycount
+
+6. LastRetry
+   - Type: DateTime
+   - Schema: vafe_lastretry
+
+7. ErrorDetails
+   - Type: Multi-line text
+   - Max Length: 2000
+   - Schema: vafe_errordetails
+
+8. PayloadSent
+   - Type: Multi-line text
+   - Max Length: 5000
+   - Schema: vafe_payloadsent
+
+9. HTTPStatusCode
+   - Type: Whole number
+   - Min: 100, Max: 599
+   - Schema: vafe_httpstatuscode

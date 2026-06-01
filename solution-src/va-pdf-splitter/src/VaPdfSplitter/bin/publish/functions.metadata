@@ -1,0 +1,56 @@
+[
+  {
+    "name": "GetPageCount",
+    "scriptFile": "VaPdfSplitter.dll",
+    "entryPoint": "VaPdfSplitter.Functions.PdfFunctions.GetPageCount",
+    "language": "dotnet-isolated",
+    "properties": {
+      "IsCodeless": false
+    },
+    "bindings": [
+      {
+        "name": "req",
+        "direction": "In",
+        "type": "httpTrigger",
+        "authLevel": "Function",
+        "methods": [
+          "post"
+        ],
+        "route": "pdf/page-count",
+        "properties": {}
+      },
+      {
+        "name": "$return",
+        "type": "http",
+        "direction": "Out"
+      }
+    ]
+  },
+  {
+    "name": "SplitPdf",
+    "scriptFile": "VaPdfSplitter.dll",
+    "entryPoint": "VaPdfSplitter.Functions.PdfFunctions.SplitPdf",
+    "language": "dotnet-isolated",
+    "properties": {
+      "IsCodeless": false
+    },
+    "bindings": [
+      {
+        "name": "req",
+        "direction": "In",
+        "type": "httpTrigger",
+        "authLevel": "Function",
+        "methods": [
+          "post"
+        ],
+        "route": "pdf/split",
+        "properties": {}
+      },
+      {
+        "name": "$return",
+        "type": "http",
+        "direction": "Out"
+      }
+    ]
+  }
+]

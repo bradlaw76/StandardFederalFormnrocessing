@@ -1,0 +1,86 @@
+{
+  "name": "VAFE-Flow-01-SharePointIntake",
+  "type": "automated",
+  "trigger": {
+    "connector": "sharepointonline",
+    "operation": "When a file is created or modified (properties only)",
+    "siteAddress": "https://d365demotsce80677168.sharepoint.com/sites/DepartmentofVeteranAffairs",
+    "libraryName": "FormIntake",
+    "triggerCondition": "@startsWith(triggerOutputs()?['body/{FilenameWithExtension}'], 'VA-10-3542-')"
+  },
+  "inputs": [],
+  "outputs": [
+    "FormSubmissionId",
+    "FileIdentifier"
+  ],
+  "actions": [
+    {
+      "step": 1,
+      "name": "Initialize_Context",
+      "connector": "built-in",
+      "operation": "Initialize variable",
+      "variables": [
+        {
+          "name": "FormId",
+          "type": "string",
+          "value": "@{replace(replace(triggerOutputs()?['body/{FilenameWithExtension}'], '.pdf', ''), 'VA-10-3542-', '')}"
+        },
+        {
+          "name": "FileIdentifier",
+          "type": "string",
+          "value": "@{triggerOutputs()?['body/Identifier']}"
+        },
+        {
+          "name": "SubmittedUtc",
+          "type": "string",
+          "value": "@{utcNow()}"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "name": "Create_FormSubmission",
+      "connector": "dataverse",
+      "operation": "Add a new row",
+      "table": "vafe_formsubmission",
+      "columns": {
+        "vafe_form_id": "@{variables('FormId')}",
+        "vafe_file_name": "@{triggerOutputs()?['body/{FilenameWithExtension}']}",
+        "vafe_file_url": "@{triggerOutputs()?['body/{Link}']}",
+        "vafe_submitted_date": "@{variables('SubmittedUtc')}",
+        "vafe_status": "Intake"
+      }
+    },
+    {
+      "step": 3,
+      "name": "Create_AuditLog_FileValidated",
+      "connector": "dataverse",
+      "operation": "Add a new row",
+      "table": "vafe_auditlog",
+      "columns": {
+        "vafe_form_submission@odata.bind": "@{concat('/vafe_formsubmissions(', outputs('Create_FormSubmission')?['body/vafe_formsubmissionid'], ')')}",
+        "vafe_event_type": "FileValidated",
+        "vafe_event_date": "@{utcNow()}",
+        "vafe_status": "Success",
+        "vafe_details": "@{concat('{\"fileName\":\"', triggerOutputs()?['body/{FilenameWithExtension}'], '\"}')}",
+        "vafe_retention_days": 90
+      }
+    },
+    {
+      "step": 4,
+      "name": "Run_Child_Flow_AIExtraction",
+      "connector": "flow",
+      "operation": "Run a Child Flow",
+      "targetFlow": "VAFE-Flow-02-AIExtraction",
+      "inputs": {
+        "FormSubmissionId": "@{outputs('Create_FormSubmission')?['body/vafe_formsubmissionid']}",
+        "FileIdentifier": "@{variables('FileIdentifier')}"
+      }
+    }
+  ],
+  "successCriteria": [
+    "FormSubmission row created",
+    "AuditLog FileValidated row created",
+    "AI extraction child flow invoked"
+  ]
+}

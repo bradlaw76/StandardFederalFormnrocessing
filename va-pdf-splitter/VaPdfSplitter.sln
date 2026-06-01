@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{648C66A8-4634-48AF-B1B6-AA749BAFCE52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VaPdfSplitter", "src\VaPdfSplitter\VaPdfSplitter.csproj", "{0BBEDD0D-5218-4D06-B17A-5BC4DEF95421}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8256A555-B37F-4D79-A4AA-FBA362F0D06B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VaPdfSplitter.Tests", "tests\VaPdfSplitter.Tests\VaPdfSplitter.Tests.csproj", "{0EDBCDA4-5286-4DB4-8F26-57E72123D011}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0BBEDD0D-5218-4D06-B17A-5BC4DEF95421}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BBEDD0D-5218-4D06-B17A-5BC4DEF95421}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BBEDD0D-5218-4D06-B17A-5BC4DEF95421}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BBEDD0D-5218-4D06-B17A-5BC4DEF95421}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EDBCDA4-5286-4DB4-8F26-57E72123D011}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EDBCDA4-5286-4DB4-8F26-57E72123D011}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EDBCDA4-5286-4DB4-8F26-57E72123D011}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EDBCDA4-5286-4DB4-8F26-57E72123D011}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0BBEDD0D-5218-4D06-B17A-5BC4DEF95421} = {648C66A8-4634-48AF-B1B6-AA749BAFCE52}
+		{0EDBCDA4-5286-4DB4-8F26-57E72123D011} = {8256A555-B37F-4D79-A4AA-FBA362F0D06B}
+	EndGlobalSection
+EndGlobal

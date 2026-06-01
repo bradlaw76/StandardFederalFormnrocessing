@@ -1,0 +1,54 @@
+TABLE: Form Submission
+Schema Name: vafe_FormSubmission
+Display Name: Form Submission (Plural: Form Submissions)
+Owner: User-owned
+Description: Tracks VA Form 10-3542 submissions through extraction lifecycle
+
+PRIMARY COLUMN:
+- Display Name: Form Submission
+- Data Type: Autonumber
+- Format: VAFE-{SEQNUM:6}
+- Schema Name: vafe_name
+
+FIELDS TO ADD:
+1. UploadDate
+   - Type: DateTime
+   - Default: Empty
+   - Schema: vafe_uploaddate
+
+2. SourceFile
+   - Type: Single line of text
+   - Max Length: 255
+   - Schema: vafe_sourcefile
+
+3. Status
+   - Type: Choice
+   - Options: Intake | Extracting | Extracted | Correcting | Corrected | Writing | Written
+   - Default: Intake
+   - Schema: vafe_status
+
+4. ProcessingNotes
+   - Type: Multi-line text
+   - Max Length: 2000
+   - Schema: vafe_processingnotes
+
+5. ProcessingStart
+   - Type: DateTime
+   - Schema: vafe_processingstart
+
+6. ProcessingEnd
+   - Type: DateTime
+   - Schema: vafe_processingend
+
+7. ErrorDetails
+   - Type: Multi-line text
+   - Max Length: 2000
+   - Schema: vafe_errordetails
+
+8. ProcessedBy
+   - Type: Lookup (User)
+   - Schema: vafe_processedby
+
+9. ProcessedTimestamp
+   - Type: DateTime
+   - Schema: vafe_processedtimestamp

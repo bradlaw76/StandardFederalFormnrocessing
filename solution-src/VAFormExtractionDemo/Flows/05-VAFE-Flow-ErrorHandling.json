@@ -1,0 +1,62 @@
+{
+  "name": "VAFE-Flow-05-ErrorHandling",
+  "type": "scheduled",
+  "trigger": {
+    "connector": "recurrence",
+    "operation": "Recurrence",
+    "frequency": "Minute",
+    "interval": 15
+  },
+  "actions": [
+    {
+      "step": 1,
+      "name": "List_Failed_D365WriteEvents",
+      "connector": "dataverse",
+      "operation": "List rows",
+      "table": "vafe_d365writeevent",
+      "filterRows": "vafe_status eq 534120002 and vafe_retry_count lt 3"
+    },
+    {
+      "step": 2,
+      "name": "Apply_to_each_FailedEvent",
+      "connector": "control",
+      "operation": "Apply to each",
+      "items": "@{outputs('List_Failed_D365WriteEvents')?['body/value']}"
+    },
+    {
+      "step": 3,
+      "name": "Increment_RetryCount",
+      "connector": "dataverse",
+      "operation": "Update a row",
+      "table": "vafe_d365writeevent",
+      "rowId": "@{items('Apply_to_each_FailedEvent')?['vafe_d365writeeventid']}",
+      "columns": {
+        "vafe_retry_count": "@{add(int(items('Apply_to_each_FailedEvent')?['vafe_retry_count']), 1)}",
+        "vafe_last_retry_date": "@{utcNow()}"
+      }
+    },
+    {
+      "step": 4,
+      "name": "Run_Child_Flow_D365Write_Retry",
+      "connector": "flow",
+      "operation": "Run a Child Flow",
+      "targetFlow": "MVP-02-D365-Write-Subflow",
+      "inputs": {
+        "FormSubmissionId": "@{coalesce(items('Apply_to_each_FailedEvent')?['_vafe_formsubmissionid_value'], items('Apply_to_each_FailedEvent')?['vafe_formsubmissionid'], items('Apply_to_each_FailedEvent')?['formsubmissionid'])}",
+        "PayloadJson": "@{coalesce(items('Apply_to_each_FailedEvent')?['vafe_payloadsent'], items('Apply_to_each_FailedEvent')?['d365payloadjson_'], '{}')}"
+      }
+    },
+    {
+      "step": 5,
+      "name": "Escalate_MaxRetry_Reached",
+      "connector": "condition",
+      "operation": "Condition",
+      "expression": "@greaterOrEquals(add(int(items('Apply_to_each_FailedEvent')?['vafe_retry_count']), 1), 3)",
+      "trueActions": [
+        "Update FormSubmission status to Correcting",
+        "Create CorrectionRecord reason='D365WriteMaxRetryExceeded'",
+        "Create AuditLog event='D365WriteEscalated'"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "name": "VAFE-Flow-03-DecisionRouting",
+  "type": "child",
+  "trigger": {
+    "connector": "flow",
+    "operation": "Manually trigger a flow (child)",
+    "inputs": [
+      "FormSubmissionId",
+      "ExtractionResultId",
+      "OverallConfidence"
+    ]
+  },
+  "thresholds": {
+    "autoApprove": 0.95,
+    "manualReview": 0.8
+  },
+  "conditions": [
+    {
+      "name": "AutoApprove",
+      "expression": "@greaterOrEquals(float(triggerBody()?['OverallConfidence']), 0.95)",
+      "actions": [
+        "Update FormSubmission status to ReadyForD365Write",
+        "Run child flow VAFE-Flow-04-D365Write"
+      ]
+    },
+    {
+      "name": "ManualReview",
+      "expression": "@and(greaterOrEquals(float(triggerBody()?['OverallConfidence']), 0.80), less(float(triggerBody()?['OverallConfidence']), 0.95))",
+      "actions": [
+        "Update FormSubmission status to ManualReview",
+        "Create CorrectionRecord placeholder",
+        "Create AuditLog event ManualReviewQueued"
+      ]
+    },
+    {
+      "name": "LowConfidenceFailure",
+      "expression": "@less(float(triggerBody()?['OverallConfidence']), 0.80)",
+      "actions": [
+        "Update FormSubmission status to Failed",
+        "Leave retry handling to scheduled VAFE-Flow-05-ErrorHandling",
+        "Create AuditLog event ExtractionLowConfidence"
+      ]
+    }
+  ]
+}

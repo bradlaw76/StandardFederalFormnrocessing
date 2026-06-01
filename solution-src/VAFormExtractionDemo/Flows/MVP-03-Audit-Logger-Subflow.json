@@ -1,0 +1,32 @@
+{
+  "name": "MVP-03-Audit-Logger-Subflow",
+  "type": "child",
+  "trigger": {
+    "connector": "flow",
+    "operation": "Manually trigger a flow (child)",
+    "inputs": [
+      "FormSubmissionId",
+      "Action",
+      "Severity",
+      "Details",
+      "CorrelationId"
+    ]
+  },
+  "actions": [
+    {
+      "step": 1,
+      "name": "Create_AuditLog_Row",
+      "connector": "dataverse",
+      "operation": "Add a new row",
+      "table": "vafe_auditlog",
+      "columns": {
+        "vafe_formsubmissionid@odata.bind": "@{concat('/vafe_formsubmissions(', triggerBody()?['FormSubmissionId'], ')')}",
+        "vafe_action": "@{triggerBody()?['Action']}",
+        "vafe_timestamp": "@{utcNow()}",
+        "vafe_details": "@{triggerBody()?['Details']}",
+        "vafe_severity": "@{triggerBody()?['Severity']}",
+        "vafe_correlationid": "@{coalesce(triggerBody()?['CorrelationId'], workflow()?['run']?['name'])}"
+      }
+    }
+  ]
+}

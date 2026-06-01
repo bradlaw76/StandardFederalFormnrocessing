@@ -1,0 +1,10 @@
+# Trigger condition (Flow 1)
+@startsWith(triggerOutputs()?['body/{FilenameWithExtension}'], 'VA-10-3542-')
+
+# Confidence route (Flow 3)
+@greaterOrEquals(float(triggerBody()?['OverallConfidence']), 0.95)
+@and(greaterOrEquals(float(triggerBody()?['OverallConfidence']), 0.8), less(float(triggerBody()?['OverallConfidence']), 0.95))
+@less(float(triggerBody()?['OverallConfidence']), 0.8)
+
+# Retry filter (Flow 5)
+vafe_status eq 'Failed' and vafe_retry_count lt 3

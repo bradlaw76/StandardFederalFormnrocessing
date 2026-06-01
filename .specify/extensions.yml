@@ -1,0 +1,49 @@
+# SpeckKit Extension Hooks
+# Controls which auto-commit hooks fire before/after speckit commands.
+# Scripts are in .specify/extensions/git/scripts/powershell/
+
+hooks:
+  before_implement:
+    - extension: git
+      command: auto-commit
+      description: Save progress before implementation starts
+      script: .specify/extensions/git/scripts/powershell/auto-commit.ps1
+      args: before_implement
+      optional: true
+      enabled: false
+
+  after_implement:
+    - extension: git
+      command: auto-commit
+      description: Auto-commit after implementation completes
+      script: .specify/extensions/git/scripts/powershell/auto-commit.ps1
+      args: after_implement
+      optional: false
+      enabled: true
+
+  after_specify:
+    - extension: git
+      command: auto-commit
+      description: Auto-commit after spec is written
+      script: .specify/extensions/git/scripts/powershell/auto-commit.ps1
+      args: after_specify
+      optional: false
+      enabled: true
+
+  after_plan:
+    - extension: git
+      command: auto-commit
+      description: Auto-commit after plan is written
+      script: .specify/extensions/git/scripts/powershell/auto-commit.ps1
+      args: after_plan
+      optional: false
+      enabled: true
+
+  after_tasks:
+    - extension: git
+      command: auto-commit
+      description: Auto-commit after tasks are generated
+      script: .specify/extensions/git/scripts/powershell/auto-commit.ps1
+      args: after_tasks
+      optional: false
+      enabled: true

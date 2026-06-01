@@ -1,0 +1,62 @@
+{
+  "name": "MVP-04-D365-Retry",
+  "type": "scheduled",
+  "trigger": {
+    "connector": "recurrence",
+    "operation": "Recurrence",
+    "frequency": "Minute",
+    "interval": 15
+  },
+  "actions": [
+    {
+      "step": 1,
+      "name": "List_Failed_D365WriteEvents",
+      "connector": "dataverse",
+      "operation": "List rows",
+      "table": "vafe_d365writeevent",
+      "filterRows": "vafe_d365status eq 'Failed' and vafe_retrycount lt 3"
+    },
+    {
+      "step": 2,
+      "name": "Apply_to_each_FailedEvent",
+      "connector": "control",
+      "operation": "Apply to each",
+      "items": "@{outputs('List_Failed_D365WriteEvents')?['body/value']}"
+    },
+    {
+      "step": 3,
+      "name": "Increment_RetryCount",
+      "connector": "dataverse",
+      "operation": "Update a row",
+      "table": "vafe_d365writeevent",
+      "rowId": "@{items('Apply_to_each_FailedEvent')?['vafe_d365writeeventid']}",
+      "columns": {
+        "vafe_d365status": "Retrying",
+        "vafe_retrycount": "@{add(int(items('Apply_to_each_FailedEvent')?['vafe_retrycount']), 1)}",
+        "vafe_lastretry": "@{utcNow()}"
+      }
+    },
+    {
+      "step": 4,
+      "name": "Run_Child_Flow_D365Write",
+      "connector": "flow",
+      "operation": "Run a Child Flow",
+      "targetFlow": "MVP-02-D365-Write-Subflow",
+      "inputs": {
+        "FormSubmissionId": "@{items('Apply_to_each_FailedEvent')?['_vafe_formsubmissionid_value']}",
+        "PayloadJson": "@{coalesce(items('Apply_to_each_FailedEvent')?['vafe_payloadsent'], '{}')}"
+      }
+    },
+    {
+      "step": 5,
+      "name": "Escalate_If_Max_Retry",
+      "connector": "condition",
+      "operation": "Condition",
+      "expression": "@greaterOrEquals(int(items('Apply_to_each_FailedEvent')?['vafe_retrycount']), 3)",
+      "trueActions": [
+        "Update FormSubmission status to Failed",
+        "Create AuditLog event RetryExhausted"
+      ]
+    }
+  ]
+}

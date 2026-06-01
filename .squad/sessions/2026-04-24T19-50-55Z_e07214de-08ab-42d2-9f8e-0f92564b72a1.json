@@ -1,0 +1,12 @@
+{
+  "id": "e07214de-08ab-42d2-9f8e-0f92564b72a1",
+  "createdAt": "2026-04-24T19:50:36.003Z",
+  "lastActiveAt": "2026-04-24T19:50:55.553Z",
+  "messages": [
+    {
+      "role": "system",
+      "content": "❌ Something went wrong processing your message.\n   Try:\n   • Try again\n   • Run 'squad doctor' for diagnostics",
+      "timestamp": "2026-04-24T19:50:55.551Z"
+    }
+  ]
+}

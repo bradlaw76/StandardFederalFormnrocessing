@@ -1,39 +1,49 @@
 # Power Automate Flow Architecture
 **Issue:** #18 | **Owner:** John Shelby | **Status:** Complete
 
+> Design lock reference (2026-05-18): `docs/FLOW-DESIGN-BASELINE-LOCK.md`.
+> Use the baseline lock before proposing flow changes to avoid rework against already validated behavior.
+> Version registry and rollback source: `docs/DESIGN-VERSION-REGISTRY.md`.
+
 ---
 
-## Overview: 3-Flow Pipeline
+## Overview: 4-Flow Pipeline
 
 ```
-SharePoint (file upload)
-        │
-        ▼
-┌─────────────────────┐
-│  Flow 1: Intake     │  Trigger: file created in FormIntake library
-│  (Trigger)          │  Creates: FormSubmission record, status = Intake
-└────────┬────────────┘
-         │ status → Extracting
-         ▼
-┌─────────────────────┐
-│  Flow 2: Extraction │  Trigger: FormSubmission status = Extracting
-│  (AI Invocation)    │  Calls: AI Builder VAForm10-3542-Extractor
-└────────┬────────────┘  Creates: ExtractionResult record
-         │               Routes: Accept / Flag / Reject per confidence
-         │
-    ┌────┴────┐
-    │         │
-    ▼         ▼
-[≥80%]    [60-79%]     [<60%]
-    │      Route to      Route to
-    │      Review Flow   Review Flow
-    ▼      (issue #31)   (issue #31)
-┌─────────────────────┐
-│  Flow 3: D365 Write │  Trigger: ExtractionResult status = Accepted
-│  (Integration)      │  Maps: fields to D365 entities
-└─────────────────────┘  Creates: D365WriteEvent record
-                         Handles: retry logic, error tracking
+SharePoint (file upload)          Manual Batch Trigger
+        │                                  │
+        ▼                                  ▼
+┌─────────────────────┐        ┌────────────────────────┐
+│ Flow 6: Batch       │        │  Flow 1: Intake        │
+│ Processor           │◄───────│  (Trigger or Child)    │
+│ (Manual trigger)    │        │  Creates: FormSubmission
+└────────┬────────────┘        └────────┬───────────────┘
+         │                              │ status → Extracting
+         │ (per file)                   ▼
+         │ List & Loop         ┌─────────────────────┐
+         └────────────────────►│ Flow 2: Extraction  │
+                               │ (AI Invocation)     │
+                               └────────┬────────────┘
+                                        │ Routes per confidence:
+                                   ┌────┴────┐
+                                   │         │
+                                   ▼         ▼
+                              [≥80%]    [60-79%/etc]
+                                   │      Route to
+                                   │      Review Flow
+                                   ▼      (issue #31)
+                              ┌─────────────────────┐
+                              │ Flow 3: D365 Write  │
+                              │ (Integration)       │
+                              │ Creates: Contact,   │
+                              │ ExtractionResult    │
+                              └─────────────────────┘
 ```
+
+**Flow 1 (MVP-01)** — Trigger on single file upload OR called by Flow 6  
+**Flow 2 (MVP-02)** — Extract data from PDF via AI Builder  
+**Flow 3 (MVP-03)** — Write extracted data to D365 + Dataverse  
+**Flow 6 (MVP-06)** — NEW: Batch processor for multiple PDFs
 
 ---
 
@@ -118,12 +128,50 @@ SharePoint (file upload)
 
 ---
 
+## Flow 6 — Batch Folder Processor (NEW — Issue #34)
+
+**Name:** `MVP-06-Batch-Folder-Processor`
+
+| Property | Value |
+|----------|-------|
+| Trigger | Manual (Button) — triggered by user |
+| Processing | Loop through all VA-10-3542-*.pdf in FormIntake, process each |
+
+**Actions:**
+1. List files in SharePoint FormIntake library
+2. Filter for files matching `VA-10-3542-*.pdf` pattern
+3. **For each file in list:**
+   - Get file properties (ID, name)
+   - Get file content
+   - Call **Flow 1 (MVP-01)** as child flow with FileId parameter
+   - Delay 5 seconds (throttle SharePoint API)
+4. Compose summary: "Batch processing complete. X files processed."
+
+**Output:**
+- Each file processed independently
+- Creates separate FormSubmission + ExtractionResult + Contact records per file
+- No deduplication (yet) — if file processed twice, creates duplicate records
+
+**Use Cases:**
+- Backfill: Upload 10 historical PDFs, trigger Flow 06 once
+- Batch entry: Staff uploads 5 claims, runs batch processor instead of waiting for single-file trigger
+- Manual reprocessing: Reprocess failed PDFs by re-uploading to FormIntake and running Flow 06
+
+**Vs. Scheduled Flow (Phase 3):**
+- Flow 06 (manual): immediate, synchronous, good for demo/backfill
+- Phase 3 (scheduled): runs every 15 min, parallel, better for high-volume production
+
+**Full Setup Guide:** `Flows/MVP-06-BATCH-PROCESSOR-SETUP.md`
+
+---
+
 ## Shared Infrastructure
 
 ### Connector Actions Used Across All Flows
 | Connector | Action | Used In |
 |-----------|--------|---------|
-| SharePoint | Get file content | Flow 2 |
+| SharePoint | Get file content | Flow 2, Flow 6 |
+| SharePoint | List files in folder | Flow 6 |
 | AI Builder | Process and save information from documents | Flow 2 |
 | Microsoft Dataverse | Create a new row | Flow 1, 2, 3 |
 | Microsoft Dataverse | Update a row | Flow 1, 2, 3 |

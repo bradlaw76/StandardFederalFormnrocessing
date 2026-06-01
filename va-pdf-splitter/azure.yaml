@@ -1,0 +1,11 @@
+name: va-pdf-splitter
+metadata:
+  template: va-pdf-splitter@0.0.1-beta
+services:
+  api:
+    project: ./src/VaPdfSplitter
+    language: dotnet
+    host: function
+infra:
+  provider: bicep
+  path: ./infra

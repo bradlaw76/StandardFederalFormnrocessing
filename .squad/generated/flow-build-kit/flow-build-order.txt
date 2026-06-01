@@ -1,0 +1,16 @@
+Build these in exact order:
+
+1) VAFE-Flow-05-ErrorHandling (scheduled)
+2) VAFE-Flow-04-D365Write (child)
+3) VAFE-Flow-03-DecisionRouting (child)
+4) VAFE-Flow-02-AIExtraction (child)
+5) VAFE-Flow-01-SharePointIntake (automated trigger)
+
+Reason:
+- Child-flow dependencies must exist before parent invokes them.
+- Intake flow is last because it invokes the rest.
+
+Validation smoke test sequence:
+- Upload one good sample: should route to Written.
+- Upload one medium-confidence sample: should route to ManualReview.
+- Force one write error: should appear in retry flow and increment retry count.

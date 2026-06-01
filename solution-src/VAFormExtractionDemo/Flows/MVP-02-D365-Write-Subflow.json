@@ -1,0 +1,80 @@
+{
+  "name": "MVP-02-D365-Write-Subflow",
+  "type": "child",
+  "trigger": {
+    "connector": "flow",
+    "operation": "Manually trigger a flow (child)",
+    "inputs": [
+      "FormSubmissionId",
+      "PayloadJson"
+    ]
+  },
+  "actions": [
+    {
+      "step": 1,
+      "name": "Parse_Payload",
+      "connector": "built-in",
+      "operation": "Parse JSON",
+      "content": "@{triggerBody()?['PayloadJson']}"
+    },
+    {
+      "step": 2,
+      "name": "Create_D365WriteEvent_Pending",
+      "connector": "dataverse",
+      "operation": "Add a new row",
+      "table": "vafe_d365writeevent",
+      "columns": {
+        "vafe_formsubmissionid@odata.bind": "@{concat('/vafe_formsubmissions(', triggerBody()?['FormSubmissionId'], ')')}",
+        "vafe_d365status": "Pending",
+        "vafe_timestampwritten": "@{utcNow()}",
+        "vafe_retrycount": 0,
+        "vafe_payloadsent": "@{triggerBody()?['PayloadJson']}"
+      }
+    },
+    {
+      "step": 3,
+      "name": "Create_Contact_In_D365",
+      "connector": "dataverse",
+      "operation": "Add a new row",
+      "table": "contacts",
+      "columns": {
+        "firstname": "@{body('Parse_Payload')?['firstName']}",
+        "lastname": "@{body('Parse_Payload')?['lastName']}",
+        "telephone1": "@{body('Parse_Payload')?['phone']}",
+        "emailaddress1": "@{body('Parse_Payload')?['email']}",
+        "description": "@{concat('VA Form intake source file: ', body('Parse_Payload')?['sourceFile'])}"
+      }
+    },
+    {
+      "step": 4,
+      "name": "Update_D365WriteEvent_Success",
+      "connector": "dataverse",
+      "operation": "Update a row",
+      "table": "vafe_d365writeevent",
+      "rowId": "@{outputs('Create_D365WriteEvent_Pending')?['body/vafe_d365writeeventid']}",
+      "columns": {
+        "vafe_d365status": "Success",
+        "vafe_d365recordid": "@{coalesce(outputs('Create_Contact_In_D365')?['body/contactid'], '')}",
+        "vafe_httpstatuscode": 201,
+        "vafe_errordetails": "Write successful"
+      }
+    },
+    {
+      "step": 5,
+      "name": "Update_FormSubmission_Written",
+      "connector": "dataverse",
+      "operation": "Update a row",
+      "table": "vafe_formsubmission",
+      "rowId": "@{triggerBody()?['FormSubmissionId']}",
+      "columns": {
+        "vafe_status": "Written"
+      }
+    }
+  ],
+  "failurePath": [
+    "On contact create failure, update vafe_d365writeevent D365 Status to Failed",
+    "Persist error message in Error Details",
+    "Persist connector status code in HTTP Status Code",
+    "Leave FormSubmission status unchanged for retry flow"
+  ]
+}

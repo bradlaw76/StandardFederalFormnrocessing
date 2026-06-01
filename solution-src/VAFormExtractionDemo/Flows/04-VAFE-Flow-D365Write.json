@@ -1,0 +1,101 @@
+{
+  "name": "VAFE-Flow-04-D365Write",
+  "type": "child",
+  "trigger": {
+    "connector": "flow",
+    "operation": "Manually trigger a flow (child)",
+    "inputs": [
+      "FormSubmissionId",
+      "ExtractionResultId"
+    ]
+  },
+  "actions": [
+    {
+      "step": 1,
+      "name": "Get_ExtractionResult",
+      "connector": "dataverse",
+      "operation": "Get a row by ID",
+      "table": "vafe_extractionresult",
+      "rowId": "@{triggerBody()?['ExtractionResultId']}"
+    },
+    {
+      "step": 2,
+      "name": "Parse_ExtractedFields_JSON",
+      "connector": "built-in",
+      "operation": "Parse JSON",
+      "content": "@{outputs('Get_ExtractionResult')?['body/vafe_extracted_fields']}"
+    },
+    {
+      "step": 3,
+      "name": "Create_D365WriteEvent_Pending",
+      "connector": "dataverse",
+      "operation": "Add a new row",
+      "table": "vafe_d365writeevent",
+      "columns": {
+        "vafe_form_submission@odata.bind": "@{concat('/vafe_formsubmissions(', triggerBody()?['FormSubmissionId'], ')')}",
+        "vafe_d365_table": "contacts",
+        "vafe_status": "Pending",
+        "vafe_write_date": "@{utcNow()}",
+        "vafe_retry_count": 0,
+        "vafe_mapped_fields": "@{outputs('Get_ExtractionResult')?['body/vafe_extracted_fields']}"
+      }
+    },
+    {
+      "step": 4,
+      "name": "Upsert_Target_Record",
+      "connector": "dataverse_or_http_with_aad",
+      "operation": "Upsert business record",
+      "mapping": {
+        "firstname": "@{body('Parse_ExtractedFields_JSON')?['VeteranFirstName']}",
+        "lastname": "@{body('Parse_ExtractedFields_JSON')?['VeteranLastName']}",
+        "vafe_ssn": "@{body('Parse_ExtractedFields_JSON')?['VeteranSSN']}",
+        "birthdate": "@{body('Parse_ExtractedFields_JSON')?['VeteranDOB']}"
+      }
+    },
+    {
+      "step": 5,
+      "name": "Update_D365WriteEvent_Success",
+      "connector": "dataverse",
+      "operation": "Update a row",
+      "table": "vafe_d365writeevent",
+      "rowId": "@{outputs('Create_D365WriteEvent_Pending')?['body/vafe_d365writeeventid']}",
+      "columns": {
+        "vafe_status": "Success",
+        "vafe_d365_record_id": "@{coalesce(outputs('Upsert_Target_Record')?['body/contactid'], '')}",
+        "vafe_last_retry_response": "Write successful"
+      }
+    },
+    {
+      "step": 6,
+      "name": "Update_FormSubmission_Written",
+      "connector": "dataverse",
+      "operation": "Update a row",
+      "table": "vafe_formsubmission",
+      "rowId": "@{triggerBody()?['FormSubmissionId']}",
+      "columns": {
+        "vafe_status": "Written",
+        "vafe_form_locked": true
+      }
+    },
+    {
+      "step": 7,
+      "name": "Create_AuditLog_D365WriteSuccess",
+      "connector": "dataverse",
+      "operation": "Add a new row",
+      "table": "vafe_auditlog",
+      "columns": {
+        "vafe_form_submission@odata.bind": "@{concat('/vafe_formsubmissions(', triggerBody()?['FormSubmissionId'], ')')}",
+        "vafe_event_type": "D365WriteSuccess",
+        "vafe_event_date": "@{utcNow()}",
+        "vafe_status": "Success",
+        "vafe_details": "@{concat('{\"writeEventId\":\"', outputs('Create_D365WriteEvent_Pending')?['body/vafe_d365writeeventid'], '\"}')}",
+        "vafe_retention_days": 90
+      }
+    }
+  ],
+  "failurePath": [
+    "On any write error, update vafe_d365writeevent status to Failed",
+    "Write vafe_last_retry_response with error message",
+    "Invoke VAFE-Flow-05-ErrorHandling"
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Onedrive\\OneDrive - Microsoft - Nov 24\\OneDrive - Microsoft\\DEMO\\My Github\\StandardFederalFormnrocessing\\StandardFederalFormnrocessing\\va-pdf-splitter\\src\\VaPdfSplitter\\VaPdfSplitter.csproj": {}
+  },
+  "projects": {
+    "D:\\Onedrive\\OneDrive - Microsoft - Nov 24\\OneDrive - Microsoft\\DEMO\\My Github\\StandardFederalFormnrocessing\\StandardFederalFormnrocessing\\va-pdf-splitter\\src\\VaPdfSplitter\\VaPdfSplitter.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Onedrive\\OneDrive - Microsoft - Nov 24\\OneDrive - Microsoft\\DEMO\\My Github\\StandardFederalFormnrocessing\\StandardFederalFormnrocessing\\va-pdf-splitter\\src\\VaPdfSplitter\\VaPdfSplitter.csproj",
+        "projectName": "VaPdfSplitter",
+        "projectPath": "D:\\Onedrive\\OneDrive - Microsoft - Nov 24\\OneDrive - Microsoft\\DEMO\\My Github\\StandardFederalFormnrocessing\\StandardFederalFormnrocessing\\va-pdf-splitter\\src\\VaPdfSplitter\\VaPdfSplitter.csproj",
+        "packagesPath": "C:\\Users\\brla\\.nuget\\packages\\",
+        "outputPath": "D:\\Onedrive\\OneDrive - Microsoft - Nov 24\\OneDrive - Microsoft\\DEMO\\My Github\\StandardFederalFormnrocessing\\StandardFederalFormnrocessing\\va-pdf-splitter\\src\\VaPdfSplitter\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\brla\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.ApplicationInsights.WorkerService": {
+              "target": "Package",
+              "version": "[2.22.0, )"
+            },
+            "Microsoft.Azure.Functions.Worker": {
+              "target": "Package",
+              "version": "[1.22.0, )"
+            },
+            "Microsoft.Azure.Functions.Worker.ApplicationInsights": {
+              "target": "Package",
+              "version": "[1.2.0, )"
+            },
+            "Microsoft.Azure.Functions.Worker.Extensions.Http": {
+              "target": "Package",
+              "version": "[3.2.0, )"
+            },
+            "Microsoft.Azure.Functions.Worker.Extensions.Http.AspNetCore": {
+              "target": "Package",
+              "version": "[1.3.2, )"
+            },
+            "PdfPig": {
+              "target": "Package",
+              "version": "[0.1.14, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.421/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

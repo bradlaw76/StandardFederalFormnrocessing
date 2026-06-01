@@ -1,0 +1,90 @@
+{
+  "name": "VAFE-Flow-02-AIExtraction",
+  "type": "child",
+  "trigger": {
+    "connector": "flow",
+    "operation": "Manually trigger a flow (child)",
+    "inputs": [
+      "FormSubmissionId",
+      "FileIdentifier"
+    ]
+  },
+  "actions": [
+    {
+      "step": 1,
+      "name": "Get_file_content",
+      "connector": "sharepointonline",
+      "operation": "Get file content",
+      "inputs": {
+        "siteAddress": "https://d365demotsce80677168.sharepoint.com/sites/DepartmentofVeteranAffairs",
+        "fileIdentifier": "@{triggerBody()?['FileIdentifier']}"
+      }
+    },
+    {
+      "step": 2,
+      "name": "Predict",
+      "connector": "aibuilder",
+      "operation": "Predict",
+      "inputs": {
+        "model": "VAFE-VA10-3542-DocProc-v1",
+        "fileContent": "@{outputs('Get_file_content')?['body/$content']}"
+      }
+    },
+    {
+      "step": 3,
+      "name": "Compose_PredictRaw",
+      "connector": "built-in",
+      "operation": "Compose",
+      "inputs": "@{string(body('Predict')?['responsev2']?['predictionOutput'])}"
+    },
+    {
+      "step": 4,
+      "name": "Compose_OverallConfidence",
+      "connector": "built-in",
+      "operation": "Compose",
+      "inputs": "@{float(coalesce(body('Predict')?['responsev2']?['predictionOutput']?['layoutConfidenceScore'], 0))}"
+    },
+    {
+      "step": 5,
+      "name": "Create_ExtractionResult",
+      "connector": "dataverse",
+      "operation": "Add a new row",
+      "table": "vafe_extractionresult",
+      "columns": {
+        "vafe_form_submission@odata.bind": "@{concat('/vafe_formsubmissions(', triggerBody()?['FormSubmissionId'], ')')}",
+        "vafe_extracted_fields": "@{string(body('Predict')?['responsev2']?['predictionOutput']?['readResults'])}",
+        "vafe_field_confidence_scores": "@{concat('{\"layoutConfidence\":', string(coalesce(body('Predict')?['responsev2']?['predictionOutput']?['layoutConfidenceScore'], 0)), '}')}",
+        "vafe_ai_model_version": "VAFE-VA10-3542-DocProc-v1",
+        "vafe_status": "Success",
+        "vafe_extraction_timestamp": "@{utcNow()}"
+      }
+    },
+    {
+      "step": 6,
+      "name": "Create_AuditLog_ExtractionCompleted",
+      "connector": "dataverse",
+      "operation": "Add a new row",
+      "table": "vafe_auditlog",
+      "columns": {
+        "vafe_form_submission@odata.bind": "@{concat('/vafe_formsubmissions(', triggerBody()?['FormSubmissionId'], ')')}",
+        "vafe_event_type": "ExtractionCompleted",
+        "vafe_event_date": "@{utcNow()}",
+        "vafe_status": "Success",
+        "vafe_details": "@{concat('{\"overallConfidence\":', string(outputs('Compose_OverallConfidence')), '}')}",
+        "vafe_retention_days": 90
+      }
+    },
+    {
+      "step": 7,
+      "name": "Run_Child_Flow_DecisionRouting",
+      "connector": "flow",
+      "operation": "Run a Child Flow",
+      "targetFlow": "VAFE-Flow-03-DecisionRouting",
+      "inputs": {
+        "FormSubmissionId": "@{triggerBody()?['FormSubmissionId']}",
+        "ExtractionResultId": "@{outputs('Create_ExtractionResult')?['body/vafe_extractionresultid']}",
+        "OverallConfidence": "@{outputs('Compose_OverallConfidence')}"
+      }
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "name": "MVP-01-SharePoint-To-D365-Intake",
+  "type": "automated",
+  "purpose": "Minimal starting flow: trigger on SharePoint upload and write directly to Dynamics 365.",
+  "trigger": {
+    "connector": "sharepointonline",
+    "operation": "When a file is created or modified (properties only)",
+    "siteAddress": "https://d365demotsce80677168.sharepoint.com/sites/DepartmentofVeteranAffairs",
+    "libraryName": "FormIntake",
+    "triggerCondition": "@startsWith(triggerOutputs()?['body/{FilenameWithExtension}'], 'VA-10-3542-')"
+  },
+  "actions": [
+    {
+      "step": 1,
+      "name": "Create_FormSubmission",
+      "connector": "dataverse",
+      "operation": "Add a new row",
+      "table": "vafe_formsubmission",
+      "columns": {
+        "vafe_form_id": "@{replace(replace(triggerOutputs()?['body/{FilenameWithExtension}'], '.pdf', ''), 'VA-10-3542-', '')}",
+        "vafe_file_name": "@{triggerOutputs()?['body/{FilenameWithExtension}']}",
+        "vafe_file_url": "@{triggerOutputs()?['body/{Link}']}",
+        "vafe_submitted_date": "@{utcNow()}",
+        "vafe_status": "Intake"
+      }
+    },
+    {
+      "step": 2,
+      "name": "Run_Child_Flow_MVP05_Extract",
+      "connector": "flow",
+      "operation": "Run a Child Flow",
+      "targetFlow": "MVP-05-AI-Extraction-Subflow",
+      "inputs": {
+        "FormSubmissionId": "@{outputs('Create_FormSubmission')?['body/vafe_formsubmissionid']}",
+        "FileIdentifier": "@{triggerOutputs()?['body/Identifier']}",
+        "CorrelationId": "@{workflow()?['run']?['name']}"
+      }
+    },
+    {
+      "step": 3,
+      "name": "Run_Child_Flow_D365Write",
+      "connector": "flow",
+      "operation": "Run a Child Flow",
+      "targetFlow": "MVP-02-D365-Write-Subflow",
+      "inputs": {
+        "FormSubmissionId": "@{coalesce(outputs('Create_FormSubmission')?['body/vafe_formsubmissionid'], outputs('Run_Child_Flow_MVP05_Extract')?['body/formsubmissionid'], outputs('Run_Child_Flow_MVP05_Extract')?['body/FormSubmissionId'])}",
+        "PayloadJson": "@{coalesce(outputs('Run_Child_Flow_MVP05_Extract')?['body/d365payloadjson_'], outputs('Run_Child_Flow_MVP05_Extract')?['body/D365PayloadJson'], '{}')}"
+      }
+    },
+    {
+      "step": 4,
+      "name": "Run_Child_Flow_AuditLogger",
+      "connector": "flow",
+      "operation": "Run a Child Flow",
+      "targetFlow": "MVP-03-Audit-Logger-Subflow",
+      "inputs": {
+        "FormSubmissionId": "@{outputs('Create_FormSubmission')?['body/vafe_formsubmissionid']}",
+        "Action": "Create",
+        "Severity": "Info",
+        "Details": "@{concat('{\"file\":\"', triggerOutputs()?['body/{FilenameWithExtension}'], '\"}')}",
+        "CorrelationId": "@{workflow()?['run']?['name']}"
+      }
+    }
+  ]
+}

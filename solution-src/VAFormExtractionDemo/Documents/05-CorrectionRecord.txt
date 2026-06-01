@@ -1,0 +1,56 @@
+TABLE: Correction Record
+Schema Name: vafe_CorrectionRecord
+Display Name: Correction Record (Plural: Correction Records)
+Owner: User-owned
+Description: Tracks manual corrections made to low-confidence AI extractions
+
+FIELDS TO ADD:
+1. ExtractionResultId [REQUIRED - LOOKUP]
+   - Type: Lookup
+   - Related Table: Extraction Result
+   - Schema: vafe_extractionresultid
+
+2. FieldName
+   - Type: Single line of text
+   - Max Length: 255
+   - Schema: vafe_fieldname
+
+3. OriginalValue
+   - Type: Multi-line text
+   - Max Length: 2000
+   - Schema: vafe_originalvalue
+
+4. CorrectedValue
+   - Type: Multi-line text
+   - Max Length: 2000
+   - Schema: vafe_correctedvalue
+
+5. CorrectionDate
+   - Type: DateTime
+   - Default: Now
+   - Schema: vafe_correctiondate
+
+6. ReviewedBy
+   - Type: Lookup (User)
+   - Schema: vafe_reviewedby
+
+7. CorrectionStatus
+   - Type: Choice
+   - Options: Pending | Approved | Rejected
+   - Schema: vafe_correctionstatus
+
+8. CorrectionNotes
+   - Type: Multi-line text
+   - Max Length: 2000
+   - Schema: vafe_correctionnotes
+
+9. FieldConfidence
+   - Type: Decimal
+   - Decimal Places: 5
+   - Min: 0, Max: 1
+   - Schema: vafe_fieldconfidence
+
+10. ReviewSLA
+    - Type: Whole number
+    - Unit: Minute
+    - Schema: vafe_reviewsla
