@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="VA Form 10-3542 — Form Processing Status Dashboard" />
+  <title>VA Form 10-3542 Processing Dashboard</title>
+  <link rel="stylesheet" href="vafe_report.css" />
+  <script src="vafe_config.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <div id="app">
+
+    <!-- ── Header ─────────────────────────────────────────── -->
+    <header class="site-header" role="banner">
+      <div class="site-header__brand">
+        <span class="site-header__title">VA Form 10-3542 — Processing Status</span>
+        <span class="site-header__subtitle">vafe_formsubmission · vafe_extractionresult · vafe_d365writeevent</span>
+      </div>
+      <div class="site-header__meta">
+        <span class="label">As of: </span><span id="report-date"></span>
+      </div>
+    </header>
+
+    <!-- ── Toolbar ────────────────────────────────────────── -->
+    <nav class="toolbar" role="navigation" aria-label="Dashboard controls">
+
+      <div class="toolbar__view-toggle" role="group" aria-label="View mode">
+        <button id="btn-exec-view" class="view-btn active" aria-pressed="true"  type="button">Summary</button>
+        <button id="btn-ops-view"  class="view-btn"        aria-pressed="false" type="button">Operations</button>
+      </div>
+
+      <div class="toolbar__actions">
+        <button id="btn-print" class="btn btn--ghost" type="button" aria-label="Print">&#128438; Print</button>
+      </div>
+
+    </nav>
+
+    <!-- ── Mock / Xrm banner ──────────────────────────────── -->
+    <div id="data-source-banner" class="status-banner status-banner--mock data-source-banner" role="status" aria-live="polite"></div>
+
+    <!-- ── Main content ───────────────────────────────────── -->
+    <main id="main-content" class="main-content" role="main">
+
+      <!-- §1 Processing KPIs -->
+      <section aria-labelledby="heading-kpis">
+        <h2 class="section-heading" id="heading-kpis">Processing Overview</h2>
+        <div id="section-kpis" aria-live="polite"></div>
+      </section>
+
+      <!-- §2 Status Pipeline -->
+      <section aria-labelledby="heading-pipeline">
+        <h2 class="section-heading" id="heading-pipeline">Form Status Pipeline</h2>
+        <p class="section-meta">Live counts from <code>vafe_formsubmission.vafe_status</code></p>
+        <div id="section-pipeline" aria-live="polite"></div>
+      </section>
+
+      <!-- §3 Extraction Performance (ops-only) -->
+      <section aria-labelledby="heading-metrics" data-ops-only="true">
+        <h2 class="section-heading" id="heading-metrics">Extraction Performance</h2>
+        <div id="section-metrics" aria-live="polite"></div>
+      </section>
+
+      <!-- §4 D365 Write Events -->
+      <section aria-labelledby="heading-writes">
+        <h2 class="section-heading" id="heading-writes">D365 Write Events</h2>
+        <div id="section-writes" aria-live="polite"></div>
+      </section>
+
+      <!-- §5 Daily Volume -->
+      <section aria-labelledby="heading-volume">
+        <h2 class="section-heading" id="heading-volume">Daily Volume — Last 7 Days</h2>
+        <div id="section-volume" aria-live="polite"></div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+      <span class="site-footer__brand">VA Form 10-3542 Processing Dashboard</span>
+      <span>Dataverse · Power Automate · AI Builder</span>
+      <span id="footer-mode">Summary View</span>
+    </footer>
+
+  </div>
+
+  <script src="vafe_data_adapter.js"></script>
+  <script src="vafe_export.js"></script>
+  <script src="vafe_report.js"></script>
+
+</body>
+</html>

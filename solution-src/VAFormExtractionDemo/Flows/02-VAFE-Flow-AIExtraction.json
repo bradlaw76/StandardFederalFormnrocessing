@@ -52,8 +52,8 @@
       "table": "vafe_extractionresult",
       "columns": {
         "vafe_form_submission@odata.bind": "@{concat('/vafe_formsubmissions(', triggerBody()?['FormSubmissionId'], ')')}",
-        "vafe_extracted_fields": "@{string(body('Predict')?['responsev2']?['predictionOutput']?['readResults'])}",
-        "vafe_field_confidence_scores": "@{concat('{\"layoutConfidence\":', string(coalesce(body('Predict')?['responsev2']?['predictionOutput']?['layoutConfidenceScore'], 0)), '}')}",
+        "vafe_extracted_fields": "@{string(body('Predict')?['responsev2']?['predictionOutput'])}",
+        "vafe_field_confidence_scores": "@{concat('{\"layoutConfidence\":', string(coalesce(body('Predict')?['responsev2']?['predictionOutput']?['layoutConfidenceScore'], 0)), ',\"totalAmountClaimed\":', string(coalesce(body('Predict')?['responsev2']?['predictionOutput']?['fields']?['totalAmountClaimed']?['confidence'], 0)), ',\"ExpenseA_Amount\":', string(coalesce(body('Predict')?['responsev2']?['predictionOutput']?['fields']?['ExpenseA_Amount']?['confidence'], 0)), ',\"ExpenseB_Amount\":', string(coalesce(body('Predict')?['responsev2']?['predictionOutput']?['fields']?['ExpenseB_Amount']?['confidence'], 0)), ',\"ExpenseC_Amount\":', string(coalesce(body('Predict')?['responsev2']?['predictionOutput']?['fields']?['ExpenseC_Amount']?['confidence'], 0)), ',\"ExpenseD_Amount\":', string(coalesce(body('Predict')?['responsev2']?['predictionOutput']?['fields']?['ExpenseD_Amount']?['confidence'], 0)), '}')}",
         "vafe_ai_model_version": "VAFE-VA10-3542-DocProc-v1",
         "vafe_status": "Success",
         "vafe_extraction_timestamp": "@{utcNow()}"

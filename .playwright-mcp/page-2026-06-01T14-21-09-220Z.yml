@@ -1,0 +1,585 @@
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e5]:
+        - generic [ref=e6]: VA Form 10-3542 Extraction Pipeline
+        - generic [ref=e7]: StandardFederalFormnrocessing · Program Dashboard
+      - generic [ref=e8]:
+        - text: "Project: StandardFederalFormnrocessing"
+        - text: "As of: Mon, Jun 1, 2026"
+    - navigation "Dashboard controls" [ref=e9]:
+      - group "View mode" [ref=e10]:
+        - button "Executive" [pressed] [ref=e11] [cursor=pointer]
+        - button "Operations" [ref=e12] [cursor=pointer]
+      - group "Data filters" [ref=e13]:
+        - generic [ref=e14]: Phase
+        - combobox "Phase" [ref=e15] [cursor=pointer]:
+          - option "All Phases" [selected]
+          - option "PH1"
+          - option "PH2"
+          - option "PH3"
+          - option "PH4"
+        - generic [ref=e16]: Owner
+        - combobox "Owner" [ref=e17] [cursor=pointer]:
+          - option "All Owners" [selected]
+          - option "Bradley Law"
+          - option "Grace Burgess"
+          - option "Isaac Calfee"
+          - option "Lena Park"
+          - option "Marcus Chen"
+          - option "Naomi Ramsay"
+          - option "Priya Nair"
+          - option "Tom Vasquez"
+        - generic [ref=e18]: Severity
+        - combobox "Severity" [ref=e19] [cursor=pointer]:
+          - option "All Severities" [selected]
+          - option "Critical"
+          - option "High"
+          - option "Medium"
+          - option "Low"
+        - generic [ref=e20]: Workstream
+        - combobox "Workstream" [ref=e21] [cursor=pointer]:
+          - option "All Workstreams" [selected]
+          - option "AI / ML"
+          - option "Architecture"
+          - option "DevOps"
+          - option "Extraction"
+          - option "Integration"
+          - option "Performance"
+          - option "QA"
+          - option "Requirements"
+          - option "Security"
+      - generic [ref=e22]:
+        - button "Print report as PDF" [ref=e23] [cursor=pointer]: 🖶 Print
+        - button "Export action plan as CSV" [ref=e24] [cursor=pointer]: ↓ Export CSV
+    - status [ref=e25]: Mock data mode — displaying seeded project data. Switch VAFE_CONFIG.useMock to false for live Dataverse.
+    - main [ref=e26]:
+      - region "Executive Summary" [ref=e27]:
+        - heading "Executive Summary" [level=2] [ref=e28]
+        - generic "Executive KPIs" [ref=e30]:
+          - article "Program Status" [ref=e31]:
+            - generic [ref=e32]: Program Status
+            - generic [ref=e34]: At Risk
+            - generic [ref=e35]: Phase 2 — Foundational
+          - article "Overall Completion" [ref=e36]:
+            - generic [ref=e37]: Overall Completion
+            - generic [ref=e38]: 60%
+            - generic [ref=e40]: 60%
+            - progressbar [ref=e42]
+          - article "Hard Blockers" [ref=e43]:
+            - generic [ref=e44]: Hard Blockers
+            - generic [ref=e45]: "1"
+            - generic [ref=e46]: Critical severity, unresolved
+          - article "Next Gate" [ref=e47]:
+            - generic [ref=e48]: Next Gate
+            - generic [ref=e49]: G04
+            - generic [ref=e50]: D365 Write-Back Verified
+            - generic [ref=e51]:
+              - text: "Owner:"
+              - strong [ref=e52]: Isaac Calfee
+              - text: "· Due: May 14, 2026"
+          - article "Delivery Confidence" [ref=e53]:
+            - generic [ref=e54]: Delivery Confidence
+            - generic [ref=e55]: 30%
+            - generic "Confidence 30%" [ref=e56]
+            - generic [ref=e58]: Composite risk-adjusted score
+      - region "Phase & Gate Health" [ref=e59]:
+        - heading "Phase & Gate Health" [level=2] [ref=e60]
+        - generic [ref=e62]:
+          - region "Phase 1 — Foundation & Architecture" [ref=e63]:
+            - generic [ref=e64]:
+              - generic [ref=e65]: Phase 1
+              - generic [ref=e66]: Complete
+            - generic [ref=e67]:
+              - generic [ref=e68]:
+                - generic [ref=e69]: Completion
+                - strong [ref=e71]: 100%
+              - progressbar [ref=e73]
+              - generic [ref=e74]:
+                - generic [ref=e75]: Owner
+                - generic [ref=e76]: Bradley Law
+              - generic [ref=e77]:
+                - generic [ref=e78]: Tasks
+                - generic [ref=e79]: 8 / 8
+              - generic [ref=e80]:
+                - generic [ref=e81]: Target
+                - generic [ref=e82]: Jan 30, 2026
+              - list "Gates for Phase 1" [ref=e83]:
+                - listitem [ref=e84]:
+                  - generic [ref=e85]: G01
+                  - generic [ref=e86]: Architecture Baseline Approved
+                  - generic [ref=e87]: Bradley Law
+                  - generic [ref=e88]: Complete
+                  - generic [ref=e89]: Jan 14, 2026
+                - listitem [ref=e90]:
+                  - generic [ref=e91]: G02
+                  - generic [ref=e92]: Dataverse Schema Deployed
+                  - generic [ref=e93]: Isaac Calfee
+                  - generic [ref=e94]: Complete
+                  - generic [ref=e95]: Jan 30, 2026
+          - region "Phase 2 — Foundational Implementation" [ref=e96]:
+            - generic [ref=e97]:
+              - generic [ref=e98]: Phase 2
+              - generic [ref=e99]: In Progress
+            - generic [ref=e100]:
+              - generic [ref=e101]:
+                - generic [ref=e102]: Completion
+                - strong [ref=e104]: 60%
+              - progressbar [ref=e106]
+              - generic [ref=e107]:
+                - generic [ref=e108]: Owner
+                - generic [ref=e109]: Isaac Calfee
+              - generic [ref=e110]:
+                - generic [ref=e111]: Tasks
+                - generic [ref=e112]: 7 / 12
+              - generic [ref=e113]:
+                - generic [ref=e114]: Target
+                - generic [ref=e115]: May 30, 2026
+              - list "Gates for Phase 2" [ref=e116]:
+                - listitem [ref=e117]:
+                  - generic [ref=e118]: G03
+                  - generic [ref=e119]: PDF Extraction MVP Running
+                  - generic [ref=e120]: Naomi Ramsay
+                  - generic [ref=e121]: Complete
+                  - generic [ref=e122]: Mar 14, 2026
+                - listitem [ref=e123]:
+                  - generic [ref=e124]: G04
+                  - generic [ref=e125]: D365 Write-Back Verified
+                  - generic [ref=e126]: Isaac Calfee
+                  - generic [ref=e127]: In Progress
+                  - generic [ref=e128]: May 14, 2026
+                - listitem [ref=e129]:
+                  - generic [ref=e130]: G05
+                  - generic [ref=e131]: AI Model v1 Baseline Locked
+                  - generic [ref=e132]: Lena Park
+                  - generic [ref=e133]: Blocked
+                  - generic [ref=e134]: May 29, 2026
+          - region "Phase 3 — Advanced Extraction & Intelligence" [ref=e135]:
+            - generic [ref=e136]:
+              - generic [ref=e137]: Phase 3
+              - generic [ref=e138]: Not Started
+            - generic [ref=e139]:
+              - generic [ref=e140]:
+                - generic [ref=e141]: Completion
+                - strong [ref=e143]: 0%
+              - generic [ref=e144]:
+                - progressbar
+              - generic [ref=e145]:
+                - generic [ref=e146]: Owner
+                - generic [ref=e147]: Naomi Ramsay
+              - generic [ref=e148]:
+                - generic [ref=e149]: Tasks
+                - generic [ref=e150]: 0 / 10
+              - generic [ref=e151]:
+                - generic [ref=e152]: Target
+                - generic [ref=e153]: Aug 30, 2026
+              - list "Gates for Phase 3" [ref=e154]:
+                - listitem [ref=e155]:
+                  - generic [ref=e156]: G06
+                  - generic [ref=e157]: QA Sign-off & UAT Pass
+                  - generic [ref=e158]: Grace Burgess
+                  - generic [ref=e159]: Not Started
+                  - generic [ref=e160]: Jul 30, 2026
+                - listitem [ref=e161]:
+                  - generic [ref=e162]: G07
+                  - generic [ref=e163]: Security & Compliance Review
+                  - generic [ref=e164]: Bradley Law
+                  - generic [ref=e165]: Not Started
+                  - generic [ref=e166]: Aug 14, 2026
+          - region "Phase 4 — Production & Hardening" [ref=e167]:
+            - generic [ref=e168]:
+              - generic [ref=e169]: Phase 4
+              - generic [ref=e170]: Not Started
+            - generic [ref=e171]:
+              - generic [ref=e172]:
+                - generic [ref=e173]: Completion
+                - strong [ref=e175]: 0%
+              - generic [ref=e176]:
+                - progressbar
+              - generic [ref=e177]:
+                - generic [ref=e178]: Owner
+                - generic [ref=e179]: Grace Burgess
+              - generic [ref=e180]:
+                - generic [ref=e181]: Tasks
+                - generic [ref=e182]: 0 / 6
+              - generic [ref=e183]:
+                - generic [ref=e184]: Target
+                - generic [ref=e185]: Sep 29, 2026
+              - list "Gates for Phase 4" [ref=e186]:
+                - listitem [ref=e187]:
+                  - generic [ref=e188]: G08
+                  - generic [ref=e189]: Production Deployment
+                  - generic [ref=e190]: Bradley Law
+                  - generic [ref=e191]: Not Started
+                  - generic [ref=e192]: Sep 29, 2026
+      - region "Blockers & Risks" [ref=e193]:
+        - heading "Blockers & Risks" [level=2] [ref=e194]
+        - generic [ref=e195]:
+          - paragraph [ref=e196]:
+            - text: "Blocker Impact Index:"
+            - strong [ref=e197]: "13"
+            - text: (Critical=5, High=3, Medium=2, Low=1)
+          - generic "Blockers" [ref=e198]:
+            - region "Training data awaiting QA sign-off" [ref=e199]:
+              - 'button "Training data awaiting QA sign-off Critical Open Impact: 5" [ref=e200] [cursor=pointer]':
+                - generic [ref=e201]:
+                  - generic [ref=e202]: Training data awaiting QA sign-off
+                  - generic [ref=e203]:
+                    - generic [ref=e204]: Critical
+                    - generic [ref=e205]: Open
+                    - generic [ref=e206]: "Impact: 5"
+                - generic [ref=e207]: ▼
+            - region "Power Automate connector credential rotation needed" [ref=e208]:
+              - 'button "Power Automate connector credential rotation needed High Open Impact: 3" [ref=e209] [cursor=pointer]':
+                - generic [ref=e210]:
+                  - generic [ref=e211]: Power Automate connector credential rotation needed
+                  - generic [ref=e212]:
+                    - generic [ref=e213]: High
+                    - generic [ref=e214]: Open
+                    - generic [ref=e215]: "Impact: 3"
+                - generic [ref=e216]: ▼
+            - region "SharePoint staging library permissions gap" [ref=e217]:
+              - 'button "SharePoint staging library permissions gap High Open Impact: 3" [ref=e218] [cursor=pointer]':
+                - generic [ref=e219]:
+                  - generic [ref=e220]: SharePoint staging library permissions gap
+                  - generic [ref=e221]:
+                    - generic [ref=e222]: High
+                    - generic [ref=e223]: Open
+                    - generic [ref=e224]: "Impact: 3"
+                - generic [ref=e225]: ▼
+            - region "E2E latency exceeds 10s target on large PDFs" [ref=e226]:
+              - 'button "E2E latency exceeds 10s target on large PDFs Medium Open Impact: 2" [ref=e227] [cursor=pointer]':
+                - generic [ref=e228]:
+                  - generic [ref=e229]: E2E latency exceeds 10s target on large PDFs
+                  - generic [ref=e230]:
+                    - generic [ref=e231]: Medium
+                    - generic [ref=e232]: Open
+                    - generic [ref=e233]: "Impact: 2"
+                - generic [ref=e234]: ▼
+          - heading "Risks" [level=3] [ref=e235]
+          - table "Risk Register" [ref=e237]:
+            - rowgroup [ref=e238]:
+              - row "ID Title Severity Probability Mitigation Owner Status" [ref=e239]:
+                - columnheader "ID" [ref=e240]
+                - columnheader "Title" [ref=e241]
+                - columnheader "Severity" [ref=e242]
+                - columnheader "Probability" [ref=e243]
+                - columnheader "Mitigation" [ref=e244]
+                - columnheader "Owner" [ref=e245]
+                - columnheader "Status" [ref=e246]
+            - rowgroup [ref=e247]:
+              - row "RSK-001 AI model accuracy below 95% threshold at launch High medium Expanded annotation sprint planned for June; fallback to human-in-loop review for confidence < 0.85. Lena Park Open" [ref=e248]:
+                - cell "RSK-001" [ref=e249]
+                - cell "AI model accuracy below 95% threshold at launch" [ref=e250]
+                - cell "High" [ref=e251]:
+                  - generic [ref=e252]: High
+                - cell "medium" [ref=e253]
+                - cell "Expanded annotation sprint planned for June; fallback to human-in-loop review for confidence < 0.85." [ref=e254]
+                - cell "Lena Park" [ref=e255]
+                - cell "Open" [ref=e256]:
+                  - generic [ref=e257]: Open
+              - row "RSK-002 VA form version changes breaking field mappings Medium low Abstract field mappings to Dataverse configuration table (T-CFG). Scheduled quarterly review. Bradley Law Mitigated" [ref=e258]:
+                - cell "RSK-002" [ref=e259]
+                - cell "VA form version changes breaking field mappings" [ref=e260]
+                - cell "Medium" [ref=e261]:
+                  - generic [ref=e262]: Medium
+                - cell "low" [ref=e263]
+                - cell "Abstract field mappings to Dataverse configuration table (T-CFG). Scheduled quarterly review." [ref=e264]
+                - cell "Bradley Law" [ref=e265]
+                - cell "Mitigated" [ref=e266]:
+                  - generic [ref=e267]: Mitigated
+              - row "RSK-003 Single-owner dependency on pipeline maintainer Low low Documentation sprint in Phase 3. Cross-training planned. Bradley Law Open" [ref=e268]:
+                - cell "RSK-003" [ref=e269]
+                - cell "Single-owner dependency on pipeline maintainer" [ref=e270]
+                - cell "Low" [ref=e271]:
+                  - generic [ref=e272]: Low
+                - cell "low" [ref=e273]
+                - cell "Documentation sprint in Phase 3. Cross-training planned." [ref=e274]
+                - cell "Bradley Law" [ref=e275]
+                - cell "Open" [ref=e276]:
+                  - generic [ref=e277]: Open
+      - region "Team & Ownership" [ref=e278]:
+        - heading "Team & Ownership" [level=2] [ref=e279]
+        - generic [ref=e281]:
+          - article "Bradley Law" [ref=e282]:
+            - generic [ref=e283]:
+              - generic [ref=e284]: BL
+              - generic [ref=e285]:
+                - generic [ref=e286]: Bradley Law
+                - generic [ref=e287]: Program Lead / Architect
+            - generic [ref=e288]: Architecture
+            - 'generic "Open actions: 2" [ref=e289]':
+              - generic [ref=e290]: 2 open actions
+          - article "Isaac Calfee" [ref=e293]:
+            - generic [ref=e294]:
+              - generic [ref=e295]: IC
+              - generic [ref=e296]:
+                - generic [ref=e297]: Isaac Calfee
+                - generic [ref=e298]: D365 Integration Engineer
+            - generic [ref=e299]: Integration
+            - 'generic "Open actions: 3" [ref=e300]':
+              - generic [ref=e301]: 3 open actions
+          - article "Naomi Ramsay" [ref=e304]:
+            - generic [ref=e305]:
+              - generic [ref=e306]: NR
+              - generic [ref=e307]:
+                - generic [ref=e308]: Naomi Ramsay
+                - generic [ref=e309]: PDF Extraction Engineer
+            - generic [ref=e310]: Extraction
+            - 'generic "Open actions: 1" [ref=e311]':
+              - generic [ref=e312]: 1 open actions
+          - article "Grace Burgess" [ref=e315]:
+            - generic [ref=e316]:
+              - generic [ref=e317]: GB
+              - generic [ref=e318]:
+                - generic [ref=e319]: Grace Burgess
+                - generic [ref=e320]: QA Lead / UAT Owner
+            - generic [ref=e321]: QA
+            - 'generic "Open actions: 1" [ref=e322]':
+              - generic [ref=e323]: 1 open actions
+          - article "Lena Park" [ref=e326]:
+            - generic [ref=e327]:
+              - generic [ref=e328]: LP
+              - generic [ref=e329]:
+                - generic [ref=e330]: Lena Park
+                - generic [ref=e331]: AI / ML Engineer
+            - generic [ref=e332]: AI / ML
+            - 'generic "Open actions: 1" [ref=e333]':
+              - generic [ref=e334]: 1 open actions
+          - article "Marcus Chen" [ref=e337]:
+            - generic [ref=e338]:
+              - generic [ref=e339]: MC
+              - generic [ref=e340]:
+                - generic [ref=e341]: Marcus Chen
+                - generic [ref=e342]: DevOps / Infrastructure
+            - generic [ref=e343]: DevOps
+            - 'generic "Open actions: 0" [ref=e344]':
+              - generic [ref=e345]: 0 open actions
+          - article "Priya Nair" [ref=e347]:
+            - generic [ref=e348]:
+              - generic [ref=e349]: PN
+              - generic [ref=e350]:
+                - generic [ref=e351]: Priya Nair
+                - generic [ref=e352]: Business Analyst
+            - generic [ref=e353]: Requirements
+            - 'generic "Open actions: 0" [ref=e354]':
+              - generic [ref=e355]: 0 open actions
+          - article "Tom Vasquez" [ref=e357]:
+            - generic [ref=e358]:
+              - generic [ref=e359]: TV
+              - generic [ref=e360]:
+                - generic [ref=e361]: Tom Vasquez
+                - generic [ref=e362]: Security & Compliance
+            - generic [ref=e363]: Security
+            - 'generic "Open actions: 0" [ref=e364]':
+              - generic [ref=e365]: 0 open actions
+      - region "Decision Register" [ref=e367]:
+        - heading "Decision Register" [level=2] [ref=e368]
+        - generic [ref=e370]:
+          - region "Decision D-001" [ref=e371]:
+            - button "D-001 Azure AI Document Intelligence selected as primary extraction engine Approved Nov 19, 2025" [ref=e372] [cursor=pointer]:
+              - generic [ref=e373]: D-001
+              - generic [ref=e374]: Azure AI Document Intelligence selected as primary extraction engine
+              - generic [ref=e375]:
+                - generic [ref=e376]: Approved
+                - generic [ref=e377]: Nov 19, 2025
+              - generic [ref=e378]: ▼
+            - generic:
+              - paragraph [ref=e379]: Native Azure / M365 ecosystem fit, prebuilt VA form model support, SDK parity with Power Platform connectors.
+              - paragraph [ref=e380]:
+                - strong [ref=e381]: "Impact:"
+                - text: All extraction modules depend on Azure DI API. Cost model tied to page-volume pricing.
+              - paragraph [ref=e382]:
+                - text: "Made by:"
+                - strong [ref=e383]: Bradley Law
+                - text: "· Phase:"
+                - strong [ref=e384]: PH1
+          - region "Decision D-002" [ref=e385]:
+            - button "D-002 Dataverse as system of record (not SharePoint Lists) Approved Nov 24, 2025" [ref=e386] [cursor=pointer]:
+              - generic [ref=e387]: D-002
+              - generic [ref=e388]: Dataverse as system of record (not SharePoint Lists)
+              - generic [ref=e389]:
+                - generic [ref=e390]: Approved
+                - generic [ref=e391]: Nov 24, 2025
+              - generic [ref=e392]: ▼
+            - generic:
+              - paragraph [ref=e393]: Dataverse provides relational integrity, RBAC, audit log, and Dynamics 365 native integration that SharePoint Lists cannot match at required compliance level.
+              - paragraph [ref=e394]:
+                - strong [ref=e395]: "Impact:"
+                - text: Schema locked to 5 core tables. All downstream Power BI and model-driven app views depend on this.
+              - paragraph [ref=e396]:
+                - text: "Made by:"
+                - strong [ref=e397]: Bradley Law
+                - text: "· Phase:"
+                - strong [ref=e398]: PH1
+          - region "Decision D-003" [ref=e399]:
+            - button "D-003 CSP-safe web resource architecture (no external CDNs) Approved Jan 9, 2026" [ref=e400] [cursor=pointer]:
+              - generic [ref=e401]: D-003
+              - generic [ref=e402]: CSP-safe web resource architecture (no external CDNs)
+              - generic [ref=e403]:
+                - generic [ref=e404]: Approved
+                - generic [ref=e405]: Jan 9, 2026
+              - generic [ref=e406]: ▼
+            - generic:
+              - paragraph [ref=e407]: D365 Unified Interface CSP blocks eval and external script origins. All dashboard JS/CSS must be self-contained web resources.
+              - paragraph [ref=e408]:
+                - strong [ref=e409]: "Impact:"
+                - text: No chart libraries, no React/Vue, no Bootstrap from CDN. Vanilla HTML/CSS/JS only.
+              - paragraph [ref=e410]:
+                - text: "Made by:"
+                - strong [ref=e411]: Bradley Law
+                - text: "· Phase:"
+                - strong [ref=e412]: PH1
+          - region "Decision D-004" [ref=e413]:
+            - button "D-004 PDF split-before-extract pattern (page-level chunking) Approved Feb 4, 2026" [ref=e414] [cursor=pointer]:
+              - generic [ref=e415]: D-004
+              - generic [ref=e416]: PDF split-before-extract pattern (page-level chunking)
+              - generic [ref=e417]:
+                - generic [ref=e418]: Approved
+                - generic [ref=e419]: Feb 4, 2026
+              - generic [ref=e420]: ▼
+            - generic:
+              - paragraph [ref=e421]: Form 10-3542 spans variable pages; splitting to single-page images before OCR improves accuracy by 8pp vs. whole-document processing.
+              - paragraph [ref=e422]:
+                - strong [ref=e423]: "Impact:"
+                - text: Splitter module (va-pdf-splitter) must precede all extraction flows.
+              - paragraph [ref=e424]:
+                - text: "Made by:"
+                - strong [ref=e425]: Naomi Ramsay
+                - text: "· Phase:"
+                - strong [ref=e426]: PH2
+          - region "Decision D-005" [ref=e427]:
+            - 'button "D-005 Dual-path routing: high-confidence auto-post, low-confidence human review Approved Feb 28, 2026" [ref=e428] [cursor=pointer]':
+              - generic [ref=e429]: D-005
+              - generic [ref=e430]: "Dual-path routing: high-confidence auto-post, low-confidence human review"
+              - generic [ref=e431]:
+                - generic [ref=e432]: Approved
+                - generic [ref=e433]: Feb 28, 2026
+              - generic [ref=e434]: ▼
+            - generic:
+              - paragraph [ref=e435]: Extractions with confidence ≥ 0.85 write directly to Dataverse. Below threshold routes to human review queue to maintain accuracy target.
+              - paragraph [ref=e436]:
+                - strong [ref=e437]: "Impact:"
+                - text: Requires review queue entity in Dataverse and staffed review SLA agreement.
+              - paragraph [ref=e438]:
+                - text: "Made by:"
+                - strong [ref=e439]: Grace Burgess
+                - text: "· Phase:"
+                - strong [ref=e440]: PH2
+          - region "Decision D-006" [ref=e441]:
+            - button "D-006 Mock data mode mandatory for local/offline web resource preview Approved Apr 14, 2026" [ref=e442] [cursor=pointer]:
+              - generic [ref=e443]: D-006
+              - generic [ref=e444]: Mock data mode mandatory for local/offline web resource preview
+              - generic [ref=e445]:
+                - generic [ref=e446]: Approved
+                - generic [ref=e447]: Apr 14, 2026
+              - generic [ref=e448]: ▼
+            - generic:
+              - paragraph [ref=e449]: Web resources have no Xrm context outside D365. Mock mode allows development, review, and stakeholder demo without live Dataverse connectivity.
+              - paragraph [ref=e450]:
+                - strong [ref=e451]: "Impact:"
+                - text: VAFE_CONFIG.useMock = true is the default. Must be flipped to false in D365 deployment.
+              - paragraph [ref=e452]:
+                - text: "Made by:"
+                - strong [ref=e453]: Bradley Law
+                - text: "· Phase:"
+                - strong [ref=e454]: PH2
+      - region "Next 7-Day Action Plan" [ref=e455]:
+        - heading "Next 7-Day Action Plan" [level=2] [ref=e456]
+        - table "7-Day Action Plan" [ref=e459]:
+          - rowgroup [ref=e460]:
+            - row "Task Title Owner Due Priority Status Workstream" [ref=e461]:
+              - columnheader "Task" [ref=e462]
+              - columnheader "Title" [ref=e463]
+              - columnheader "Owner" [ref=e464]
+              - columnheader "Due" [ref=e465]
+              - columnheader "Priority" [ref=e466]
+              - columnheader "Status" [ref=e467]
+              - columnheader "Workstream" [ref=e468]
+          - rowgroup [ref=e469]:
+            - row "T-ACT-01 Obtain QA sign-off on training data corpus Grace Burgess Jun 7, 2026 Critical Open QA" [ref=e470]:
+              - cell "T-ACT-01" [ref=e471]
+              - cell "Obtain QA sign-off on training data corpus" [ref=e472]
+              - cell "Grace Burgess" [ref=e473]
+              - cell "Jun 7, 2026" [ref=e474]
+              - cell "Critical" [ref=e475]:
+                - generic [ref=e476]: Critical
+              - cell "Open" [ref=e477]:
+                - generic [ref=e478]: Open
+              - cell "QA" [ref=e479]
+            - row "T-ACT-02 Submit IT Security ticket for credential rotation Isaac Calfee Jun 2, 2026 High Open Integration" [ref=e480]:
+              - cell "T-ACT-02" [ref=e481]
+              - cell "Submit IT Security ticket for credential rotation" [ref=e482]
+              - cell "Isaac Calfee" [ref=e483]
+              - cell "Jun 2, 2026" [ref=e484]
+              - cell "High" [ref=e485]:
+                - generic [ref=e486]: High
+              - cell "Open" [ref=e487]:
+                - generic [ref=e488]: Open
+              - cell "Integration" [ref=e489]
+            - row "T-ACT-03 Resolve SharePoint service account permissions (403) Isaac Calfee Jun 4, 2026 High In Progress Integration" [ref=e490]:
+              - cell "T-ACT-03" [ref=e491]
+              - cell "Resolve SharePoint service account permissions (403)" [ref=e492]
+              - cell "Isaac Calfee" [ref=e493]
+              - cell "Jun 4, 2026" [ref=e494]
+              - cell "High" [ref=e495]:
+                - generic [ref=e496]: High
+              - cell "In Progress" [ref=e497]:
+                - generic [ref=e498]: In Progress
+              - cell "Integration" [ref=e499]
+            - row "T-ACT-04 Profile splitter module for latency on 15+ page PDFs Naomi Ramsay Jun 6, 2026 Medium Open Performance" [ref=e500]:
+              - cell "T-ACT-04" [ref=e501]
+              - cell "Profile splitter module for latency on 15+ page PDFs" [ref=e502]
+              - cell "Naomi Ramsay" [ref=e503]
+              - cell "Jun 6, 2026" [ref=e504]
+              - cell "Medium" [ref=e505]:
+                - generic [ref=e506]: Medium
+              - cell "Open" [ref=e507]:
+                - generic [ref=e508]: Open
+              - cell "Performance" [ref=e509]
+            - row "T-ACT-05 Expand annotation sprint plan (targeting June batch) Lena Park Jun 5, 2026 High Open AI / ML" [ref=e510]:
+              - cell "T-ACT-05" [ref=e511]
+              - cell "Expand annotation sprint plan (targeting June batch)" [ref=e512]
+              - cell "Lena Park" [ref=e513]
+              - cell "Jun 5, 2026" [ref=e514]
+              - cell "High" [ref=e515]:
+                - generic [ref=e516]: High
+              - cell "Open" [ref=e517]:
+                - generic [ref=e518]: Open
+              - cell "AI / ML" [ref=e519]
+            - row "T-ACT-06 Complete E2E D365 write-back test (Gate G04) Isaac Calfee Jun 6, 2026 High In Progress Integration" [ref=e520]:
+              - cell "T-ACT-06" [ref=e521]
+              - cell "Complete E2E D365 write-back test (Gate G04)" [ref=e522]
+              - cell "Isaac Calfee" [ref=e523]
+              - cell "Jun 6, 2026" [ref=e524]
+              - cell "High" [ref=e525]:
+                - generic [ref=e526]: High
+              - cell "In Progress" [ref=e527]:
+                - generic [ref=e528]: In Progress
+              - cell "Integration" [ref=e529]
+            - row "T-ACT-07 Document cross-training plan for extraction module Bradley Law Jun 29, 2026 Low Open Architecture" [ref=e530]:
+              - cell "T-ACT-07" [ref=e531]
+              - cell "Document cross-training plan for extraction module" [ref=e532]
+              - cell "Bradley Law" [ref=e533]
+              - cell "Jun 29, 2026" [ref=e534]
+              - cell "Low" [ref=e535]:
+                - generic [ref=e536]: Low
+              - cell "Open" [ref=e537]:
+                - generic [ref=e538]: Open
+              - cell "Architecture" [ref=e539]
+            - row "T-ACT-08 Abstract field mappings to CFG Dataverse table Bradley Law Jul 14, 2026 Medium Open Architecture" [ref=e540]:
+              - cell "T-ACT-08" [ref=e541]
+              - cell "Abstract field mappings to CFG Dataverse table" [ref=e542]
+              - cell "Bradley Law" [ref=e543]
+              - cell "Jul 14, 2026" [ref=e544]
+              - cell "Medium" [ref=e545]:
+                - generic [ref=e546]: Medium
+              - cell "Open" [ref=e547]:
+                - generic [ref=e548]: Open
+              - cell "Architecture" [ref=e549]
+    - contentinfo [ref=e550]:
+      - generic [ref=e551]: StandardFederalFormnrocessing
+      - generic [ref=e552]: VA Form 10-3542 Extraction Pipeline · Dynamics 365 Web Resource
+      - generic [ref=e553]: Executive View

@@ -31,6 +31,11 @@
 | `TreatmentFacility` | Text | Section 4 — Medical Facility | Facility name |
 | `AppointmentDate` | Date | Section 4 — Appointment Date | MM/DD/YYYY |
 | `TransportationMode` | Text | Section 5 — Mode of Transportation | Ambulance / Chair Car / Regular |
+| `ExpenseA_Amount` | Number | Expense line A | Decimal currency amount |
+| `ExpenseB_Amount` | Number | Expense line B | Decimal currency amount |
+| `ExpenseC_Amount` | Number | Expense line C | Decimal currency amount |
+| `ExpenseD_Amount` | Number | Expense line D | Decimal currency amount |
+| `totalAmountClaimed` | Number | Expense total | Sum of all claimed amounts |
 | `SignatureDate` | Date | Bottom — Veteran Signature | MM/DD/YYYY |
 | `CertifyingOfficialName` | Text | Bottom — Certifying Official | Name field |
 

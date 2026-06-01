@@ -1,0 +1,581 @@
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e5]:
+        - generic [ref=e6]: VA Form 10-3542 Extraction Pipeline
+        - generic [ref=e7]: StandardFederalFormnrocessing · Program Dashboard
+      - generic [ref=e8]:
+        - text: "Project: StandardFederalFormnrocessing"
+        - text: "As of: Mon, Jun 1, 2026"
+    - navigation "Dashboard controls" [ref=e9]:
+      - group "View mode" [ref=e10]:
+        - button "Executive" [pressed] [ref=e11] [cursor=pointer]
+        - button "Operations" [ref=e12] [cursor=pointer]
+      - group "Data filters" [ref=e13]:
+        - generic [ref=e14]: Phase
+        - combobox "Phase" [ref=e15] [cursor=pointer]:
+          - option "All Phases" [selected]
+          - option "PH1"
+          - option "PH2"
+          - option "PH3"
+          - option "PH4"
+        - generic [ref=e16]: Owner
+        - combobox "Owner" [ref=e17] [cursor=pointer]:
+          - option "All Owners" [selected]
+          - option "Alfie Solomons"
+          - option "Grace Burgess"
+          - option "John Shelby"
+          - option "Lizzie Stark"
+          - option "Michael Gray"
+          - option "Polly Gray"
+          - option "Tommy Shelby"
+        - generic [ref=e18]: Severity
+        - combobox "Severity" [ref=e19] [cursor=pointer]:
+          - option "All Severities" [selected]
+          - option "Critical"
+          - option "High"
+          - option "Medium"
+          - option "Low"
+        - generic [ref=e20]: Workstream
+        - combobox "Workstream" [ref=e21] [cursor=pointer]:
+          - option "All Workstreams" [selected]
+          - option "AI / ML"
+          - option "Architecture"
+          - option "Data / Schema"
+          - option "Integration"
+          - option "Platform Setup"
+          - option "Power Apps"
+          - option "Power Automate"
+          - option "QA"
+      - generic [ref=e22]:
+        - button "Print report as PDF" [ref=e23] [cursor=pointer]: 🖶 Print
+        - button "Export action plan as CSV" [ref=e24] [cursor=pointer]: ↓ Export CSV
+    - status [ref=e25]: Mock data mode — displaying seeded project data. Switch VAFE_CONFIG.useMock to false for live Dataverse.
+    - main [ref=e26]:
+      - region "Executive Summary" [ref=e27]:
+        - heading "Executive Summary" [level=2] [ref=e28]
+        - generic "Executive KPIs" [ref=e30]:
+          - article "Program Status" [ref=e31]:
+            - generic [ref=e32]: Program Status
+            - generic [ref=e34]: At Risk
+            - generic [ref=e35]: Phase 1 — Environment Setup
+          - article "Overall Completion" [ref=e36]:
+            - generic [ref=e37]: Overall Completion
+            - generic [ref=e38]: 18%
+            - generic [ref=e40]: 18%
+            - progressbar [ref=e42]
+          - article "Hard Blockers" [ref=e43]:
+            - generic [ref=e44]: Hard Blockers
+            - generic [ref=e45]: "1"
+            - generic [ref=e46]: Critical severity, unresolved
+          - article "Next Gate" [ref=e47]:
+            - generic [ref=e48]: Next Gate
+            - generic [ref=e49]: PG-03
+            - generic [ref=e50]: Phase 1 Environment Setup Complete (T001–T008)
+            - generic [ref=e51]:
+              - text: "Owner:"
+              - strong [ref=e52]: Alfie Solomons
+              - text: "· Due: Jun 13, 2026"
+          - article "Delivery Confidence" [ref=e53]:
+            - generic [ref=e54]: Delivery Confidence
+            - generic [ref=e55]: 25%
+            - generic "Confidence 25%" [ref=e56]
+            - generic [ref=e58]: Composite risk-adjusted score
+      - region "Phase & Gate Health" [ref=e59]:
+        - heading "Phase & Gate Health" [level=2] [ref=e60]
+        - generic [ref=e62]:
+          - region "Phase 1 — Environment Setup (T001–T008)" [ref=e63]:
+            - generic [ref=e64]:
+              - generic [ref=e65]: Phase 1
+              - generic [ref=e66]: In Progress
+            - generic [ref=e67]:
+              - generic [ref=e68]:
+                - generic [ref=e69]: Completion
+                - strong [ref=e71]: 13%
+              - progressbar [ref=e73]
+              - generic [ref=e74]:
+                - generic [ref=e75]: Owner
+                - generic [ref=e76]: Alfie Solomons
+              - generic [ref=e77]:
+                - generic [ref=e78]: Tasks
+                - generic [ref=e79]: 1 / 8
+              - generic [ref=e80]:
+                - generic [ref=e81]: Target
+                - generic [ref=e82]: Jun 13, 2026
+              - list "Gates for Phase 1" [ref=e83]:
+                - listitem [ref=e84]:
+                  - generic [ref=e85]: PG-01
+                  - generic [ref=e86]: Specification Locked (v1.0.1-Ready)
+                  - generic [ref=e87]: Tommy Shelby
+                  - generic [ref=e88]: Complete
+                  - generic [ref=e89]: Apr 23, 2026
+                - listitem [ref=e90]:
+                  - generic [ref=e91]: PG-02
+                  - generic [ref=e92]: Architecture Review — Tommy Shelby sign-off
+                  - generic [ref=e93]: Tommy Shelby
+                  - generic [ref=e94]: Pending
+                  - generic [ref=e95]: Jun 7, 2026
+                - listitem [ref=e96]:
+                  - generic [ref=e97]: PG-03
+                  - generic [ref=e98]: Phase 1 Environment Setup Complete (T001–T008)
+                  - generic [ref=e99]: Alfie Solomons
+                  - generic [ref=e100]: In Progress
+                  - generic [ref=e101]: Jun 13, 2026
+          - region "Phase 2 — Foundational Build (T009–T029)" [ref=e102]:
+            - generic [ref=e103]:
+              - generic [ref=e104]: Phase 2
+              - generic [ref=e105]: In Progress
+            - generic [ref=e106]:
+              - generic [ref=e107]:
+                - generic [ref=e108]: Completion
+                - strong [ref=e110]: 20%
+              - progressbar [ref=e112]
+              - generic [ref=e113]:
+                - generic [ref=e114]: Owner
+                - generic [ref=e115]: Polly Gray
+              - generic [ref=e116]:
+                - generic [ref=e117]: Tasks
+                - generic [ref=e118]: 4 / 21
+              - generic [ref=e119]:
+                - generic [ref=e120]: Target
+                - generic [ref=e121]: Jul 30, 2026
+              - list "Gates for Phase 2" [ref=e122]:
+                - listitem [ref=e123]:
+                  - generic [ref=e124]: PG-04
+                  - generic [ref=e125]: Phase 2 Foundational Complete — schema deployed, AI Builder trained
+                  - generic [ref=e126]: Polly Gray
+                  - generic [ref=e127]: Not Started
+                  - generic [ref=e128]: Jul 30, 2026
+          - region "Phase 3 — Core Features (T030–T057)" [ref=e129]:
+            - generic [ref=e130]:
+              - generic [ref=e131]: Phase 3
+              - generic [ref=e132]: Not Started
+            - generic [ref=e133]:
+              - generic [ref=e134]:
+                - generic [ref=e135]: Completion
+                - strong [ref=e137]: 0%
+              - generic [ref=e138]:
+                - progressbar
+              - generic [ref=e139]:
+                - generic [ref=e140]: Owner
+                - generic [ref=e141]: John Shelby
+              - generic [ref=e142]:
+                - generic [ref=e143]: Tasks
+                - generic [ref=e144]: 0 / 28
+              - generic [ref=e145]:
+                - generic [ref=e146]: Target
+                - generic [ref=e147]: Sep 14, 2026
+              - list "Gates for Phase 3" [ref=e148]:
+                - listitem [ref=e149]:
+                  - generic [ref=e150]: PG-05
+                  - generic [ref=e151]: Core Features Complete (Intake + Extraction + D365 Write)
+                  - generic [ref=e152]: John Shelby
+                  - generic [ref=e153]: Not Started
+                  - generic [ref=e154]: Sep 13, 2026
+          - region "Phase 4 — Extended Features & Launch (T058–T102)" [ref=e155]:
+            - generic [ref=e156]:
+              - generic [ref=e157]: Phase 4
+              - generic [ref=e158]: Not Started
+            - generic [ref=e159]:
+              - generic [ref=e160]:
+                - generic [ref=e161]: Completion
+                - strong [ref=e163]: 0%
+              - generic [ref=e164]:
+                - progressbar
+              - generic [ref=e165]:
+                - generic [ref=e166]: Owner
+                - generic [ref=e167]: Grace Burgess
+              - generic [ref=e168]:
+                - generic [ref=e169]: Tasks
+                - generic [ref=e170]: 0 / 45
+              - generic [ref=e171]:
+                - generic [ref=e172]: Target
+                - generic [ref=e173]: Sep 29, 2026
+              - list "Gates for Phase 4" [ref=e174]:
+                - listitem [ref=e175]:
+                  - generic [ref=e176]: PG-06
+                  - generic [ref=e177]: All 10 Manual Test Scenarios Pass — MVP Sign-off
+                  - generic [ref=e178]: Grace Burgess
+                  - generic [ref=e179]: Not Started
+                  - generic [ref=e180]: Sep 27, 2026
+      - region "Blockers & Risks" [ref=e181]:
+        - heading "Blockers & Risks" [level=2] [ref=e182]
+        - generic [ref=e183]:
+          - paragraph [ref=e184]:
+            - text: "Blocker Impact Index:"
+            - strong [ref=e185]: "15"
+            - text: (Critical=5, High=3, Medium=2, Low=1)
+          - generic "Blockers" [ref=e186]:
+            - region "Phase 1 environment setup incomplete — blocking all build phases" [ref=e187]:
+              - 'button "Phase 1 environment setup incomplete — blocking all build phases Critical Open Impact: 5" [ref=e188] [cursor=pointer]':
+                - generic [ref=e189]:
+                  - generic [ref=e190]: Phase 1 environment setup incomplete — blocking all build phases
+                  - generic [ref=e191]:
+                    - generic [ref=e192]: Critical
+                    - generic [ref=e193]: Open
+                    - generic [ref=e194]: "Impact: 5"
+                - generic [ref=e195]: ▼
+            - region "Tommy Shelby architecture review (Phase Gate 2) pending" [ref=e196]:
+              - 'button "Tommy Shelby architecture review (Phase Gate 2) pending High Open Impact: 3" [ref=e197] [cursor=pointer]':
+                - generic [ref=e198]:
+                  - generic [ref=e199]: Tommy Shelby architecture review (Phase Gate 2) pending
+                  - generic [ref=e200]:
+                    - generic [ref=e201]: High
+                    - generic [ref=e202]: Open
+                    - generic [ref=e203]: "Impact: 3"
+                - generic [ref=e204]: ▼
+            - 'region "Delta A: MVP-04 Retry flow design not finalised" [ref=e205]':
+              - 'button "Delta A: MVP-04 Retry flow design not finalised High Open Impact: 3" [ref=e206] [cursor=pointer]':
+                - generic [ref=e207]:
+                  - generic [ref=e208]: "Delta A: MVP-04 Retry flow design not finalised"
+                  - generic [ref=e209]:
+                    - generic [ref=e210]: High
+                    - generic [ref=e211]: Open
+                    - generic [ref=e212]: "Impact: 3"
+                - generic [ref=e213]: ▼
+            - 'region "Delta B: Manual Review contract lock outstanding" [ref=e214]':
+              - 'button "Delta B: Manual Review contract lock outstanding Medium Open Impact: 2" [ref=e215] [cursor=pointer]':
+                - generic [ref=e216]:
+                  - generic [ref=e217]: "Delta B: Manual Review contract lock outstanding"
+                  - generic [ref=e218]:
+                    - generic [ref=e219]: Medium
+                    - generic [ref=e220]: Open
+                    - generic [ref=e221]: "Impact: 2"
+                - generic [ref=e222]: ▼
+            - 'region "Delta C: Batch idempotency guardrails not implemented" [ref=e223]':
+              - 'button "Delta C: Batch idempotency guardrails not implemented Medium Open Impact: 2" [ref=e224] [cursor=pointer]':
+                - generic [ref=e225]:
+                  - generic [ref=e226]: "Delta C: Batch idempotency guardrails not implemented"
+                  - generic [ref=e227]:
+                    - generic [ref=e228]: Medium
+                    - generic [ref=e229]: Open
+                    - generic [ref=e230]: "Impact: 2"
+                - generic [ref=e231]: ▼
+          - heading "Risks" [level=3] [ref=e232]
+          - table "Risk Register" [ref=e234]:
+            - rowgroup [ref=e235]:
+              - row "ID Title Severity Probability Mitigation Owner Status" [ref=e236]:
+                - columnheader "ID" [ref=e237]
+                - columnheader "Title" [ref=e238]
+                - columnheader "Severity" [ref=e239]
+                - columnheader "Probability" [ref=e240]
+                - columnheader "Mitigation" [ref=e241]
+                - columnheader "Owner" [ref=e242]
+                - columnheader "Status" [ref=e243]
+            - rowgroup [ref=e244]:
+              - 'row "RSK-001 AI Builder accuracy below ≥90% threshold at MVP launch High medium Phase 2 T017-T024: collect 40-50 annotated forms at 300 DPI, <5% OCR error, HIPAA-compliant. Confidence routing: ≥0.95 auto-approve; 0.85–0.94 review; 0.60–0.84 manual; <0.60 reject. Michael Gray Open" [ref=e245]':
+                - cell "RSK-001" [ref=e246]
+                - cell "AI Builder accuracy below ≥90% threshold at MVP launch" [ref=e247]
+                - cell "High" [ref=e248]:
+                  - generic [ref=e249]: High
+                - cell "medium" [ref=e250]
+                - 'cell "Phase 2 T017-T024: collect 40-50 annotated forms at 300 DPI, <5% OCR error, HIPAA-compliant. Confidence routing: ≥0.95 auto-approve; 0.85–0.94 review; 0.60–0.84 manual; <0.60 reject." [ref=e251]'
+                - cell "Michael Gray" [ref=e252]
+                - cell "Open" [ref=e253]:
+                  - generic [ref=e254]: Open
+              - row "RSK-002 D365 duplicate prevention key not agreed High medium Design decision required before T032 (duplicate detection) and T053 (D365 write) are implemented. John Shelby to table proposal; Polly Gray to confirm data model impact. Polly Gray Open" [ref=e255]:
+                - cell "RSK-002" [ref=e256]
+                - cell "D365 duplicate prevention key not agreed" [ref=e257]
+                - cell "High" [ref=e258]:
+                  - generic [ref=e259]: High
+                - cell "medium" [ref=e260]
+                - cell "Design decision required before T032 (duplicate detection) and T053 (D365 write) are implemented. John Shelby to table proposal; Polly Gray to confirm data model impact." [ref=e261]
+                - cell "Polly Gray" [ref=e262]
+                - cell "Open" [ref=e263]:
+                  - generic [ref=e264]: Open
+              - row "RSK-003 PII encryption is demo-grade only High high Tracked as Phase 8 security hardening task T081. Must be resolved before any production deployment with real veteran data. Tommy Shelby Open" [ref=e265]:
+                - cell "RSK-003" [ref=e266]
+                - cell "PII encryption is demo-grade only" [ref=e267]
+                - cell "High" [ref=e268]:
+                  - generic [ref=e269]: High
+                - cell "high" [ref=e270]
+                - cell "Tracked as Phase 8 security hardening task T081. Must be resolved before any production deployment with real veteran data." [ref=e271]
+                - cell "Tommy Shelby" [ref=e272]
+                - cell "Open" [ref=e273]:
+                  - generic [ref=e274]: Open
+              - 'row "RSK-004 D365 environment on Azure Commercial (not Government) Medium low Validate cloud tier with VA stakeholder before Phase 2 deployment. D365 instance: va-forms.crm.dynamics.com (current assumption). Alfie Solomons Open" [ref=e275]':
+                - cell "RSK-004" [ref=e276]
+                - cell "D365 environment on Azure Commercial (not Government)" [ref=e277]
+                - cell "Medium" [ref=e278]:
+                  - generic [ref=e279]: Medium
+                - cell "low" [ref=e280]
+                - 'cell "Validate cloud tier with VA stakeholder before Phase 2 deployment. D365 instance: va-forms.crm.dynamics.com (current assumption)." [ref=e281]'
+                - cell "Alfie Solomons" [ref=e282]
+                - cell "Open" [ref=e283]:
+                  - generic [ref=e284]: Open
+      - region "Team & Ownership" [ref=e285]:
+        - heading "Team & Ownership" [level=2] [ref=e286]
+        - generic [ref=e288]:
+          - article "Tommy Shelby" [ref=e289]:
+            - generic [ref=e290]:
+              - generic [ref=e291]: TS
+              - generic [ref=e292]:
+                - generic [ref=e293]: Tommy Shelby
+                - generic [ref=e294]: Architect & Phase Gate Reviewer
+            - generic [ref=e295]: Architecture
+            - 'generic "Open actions: 1" [ref=e296]':
+              - generic [ref=e297]: 1 open actions
+          - article "Alfie Solomons" [ref=e300]:
+            - generic [ref=e301]:
+              - generic [ref=e302]: AS
+              - generic [ref=e303]:
+                - generic [ref=e304]: Alfie Solomons
+                - generic [ref=e305]: D365 Integration Specialist
+            - generic [ref=e306]: Integration
+            - 'generic "Open actions: 3" [ref=e307]':
+              - generic [ref=e308]: 3 open actions
+          - article "Polly Gray" [ref=e311]:
+            - generic [ref=e312]:
+              - generic [ref=e313]: PG
+              - generic [ref=e314]:
+                - generic [ref=e315]: Polly Gray
+                - generic [ref=e316]: Dataverse Schema Design Lead
+            - generic [ref=e317]: Data / Schema
+            - 'generic "Open actions: 1" [ref=e318]':
+              - generic [ref=e319]: 1 open actions
+          - article "Michael Gray" [ref=e322]:
+            - generic [ref=e323]:
+              - generic [ref=e324]: MG
+              - generic [ref=e325]:
+                - generic [ref=e326]: Michael Gray
+                - generic [ref=e327]: AI & ML Strategy Lead
+            - generic [ref=e328]: AI / ML
+            - 'generic "Open actions: 1" [ref=e329]':
+              - generic [ref=e330]: 1 open actions
+          - article "John Shelby" [ref=e333]:
+            - generic [ref=e334]:
+              - generic [ref=e335]: JS
+              - generic [ref=e336]:
+                - generic [ref=e337]: John Shelby
+                - generic [ref=e338]: Power Automate Flow Orchestration
+            - generic [ref=e339]: Power Automate
+            - 'generic "Open actions: 2" [ref=e340]':
+              - generic [ref=e341]: 2 open actions
+          - article "Lizzie Stark" [ref=e344]:
+            - generic [ref=e345]:
+              - generic [ref=e346]: LS
+              - generic [ref=e347]:
+                - generic [ref=e348]: Lizzie Stark
+                - generic [ref=e349]: Correction UI / UX (Power Apps)
+            - generic [ref=e350]: Power Apps
+            - 'generic "Open actions: 0" [ref=e351]':
+              - generic [ref=e352]: 0 open actions
+          - article "Grace Burgess" [ref=e354]:
+            - generic [ref=e355]:
+              - generic [ref=e356]: GB
+              - generic [ref=e357]:
+                - generic [ref=e358]: Grace Burgess
+                - generic [ref=e359]: QA & Testing Lead
+            - generic [ref=e360]: QA
+            - 'generic "Open actions: 0" [ref=e361]':
+              - generic [ref=e362]: 0 open actions
+      - region "Decision Register" [ref=e364]:
+        - heading "Decision Register" [level=2] [ref=e365]
+        - generic [ref=e367]:
+          - region "Decision D-001" [ref=e368]:
+            - button "D-001 Microsoft AI Builder selected as extraction engine (not Azure AI DI) Approved Apr 24, 2026" [ref=e369] [cursor=pointer]:
+              - generic [ref=e370]: D-001
+              - generic [ref=e371]: Microsoft AI Builder selected as extraction engine (not Azure AI DI)
+              - generic [ref=e372]:
+                - generic [ref=e373]: Approved
+                - generic [ref=e374]: Apr 24, 2026
+              - generic [ref=e375]: ▼
+            - generic:
+              - paragraph [ref=e376]: "Native Power Platform integration: AI Builder publishes directly to Dataverse and is callable from Power Automate without custom connectors. Prebuilt document processing model supports custom VA form field annotation. Platform: Microsoft AI Builder custom document processing."
+              - paragraph [ref=e377]:
+                - strong [ref=e378]: "Impact:"
+                - text: "All extraction tasks (T017–T024, T038–T046) use AI Builder API. Model name: VAForm10-3542-Extractor. Training minimum: 5 forms for demo, 40–50 for production ≥90% accuracy."
+              - paragraph [ref=e379]:
+                - text: "Made by:"
+                - strong [ref=e380]: Michael Gray
+                - text: "· Phase:"
+                - strong [ref=e381]: PH2
+          - region "Decision D-002" [ref=e382]:
+            - button "D-002 Dataverse as system of record — 5 tables, publisher prefix vafe_ Approved Apr 24, 2026" [ref=e383] [cursor=pointer]:
+              - generic [ref=e384]: D-002
+              - generic [ref=e385]: Dataverse as system of record — 5 tables, publisher prefix vafe_
+              - generic [ref=e386]:
+                - generic [ref=e387]: Approved
+                - generic [ref=e388]: Apr 24, 2026
+              - generic [ref=e389]: ▼
+            - generic:
+              - paragraph [ref=e390]: Dataverse provides relational integrity, RBAC, immutable audit log (BR-AuditLog-001), and native D365 integration. SharePoint Lists cannot meet HIPAA/VA audit trail and retention requirements.
+              - paragraph [ref=e391]:
+                - strong [ref=e392]: "Impact:"
+                - text: "Schema locked: vafe_formsubmission, vafe_extractionresult, vafe_correctionrecord, vafe_auditlog, vafe_d365writeevent. 49 fields, 4 relationships, 12 business rules. Solution: VA-Form-Extraction."
+              - paragraph [ref=e393]:
+                - text: "Made by:"
+                - strong [ref=e394]: Polly Gray
+                - text: "· Phase:"
+                - strong [ref=e395]: PH2
+          - region "Decision D-003" [ref=e396]:
+            - button "D-003 Flow design baseline v2.0 locked — no-rework rule in effect Approved May 17, 2026" [ref=e397] [cursor=pointer]:
+              - generic [ref=e398]: D-003
+              - generic [ref=e399]: Flow design baseline v2.0 locked — no-rework rule in effect
+              - generic [ref=e400]:
+                - generic [ref=e401]: Approved
+                - generic [ref=e402]: May 17, 2026
+              - generic [ref=e403]: ▼
+            - generic:
+              - paragraph [ref=e404]: "v2.0-design-lock (2026-05-18) freezes canonical flow names: MVP-01-SharePoint-To-D365-Intake (parent), MVP-05-AI-Extraction-Subflow, MVP-02-D365-Write-Subflow, MVP-03-Audit-Logger-Subflow. As-built baseline confirmed operational end-to-end."
+              - paragraph [ref=e405]:
+                - strong [ref=e406]: "Impact:"
+                - text: No change to as-built flows without evidence (runtime failure, failing test, or contract mismatch). Suggestions without evidence are rejected per FLOW-DESIGN-BASELINE-LOCK.md.
+              - paragraph [ref=e407]:
+                - text: "Made by:"
+                - strong [ref=e408]: Tommy Shelby
+                - text: "· Phase:"
+                - strong [ref=e409]: PH2
+          - region "Decision D-004" [ref=e410]:
+            - 'button "D-004 Confidence-based routing thresholds: four tiers Approved Apr 24, 2026" [ref=e411] [cursor=pointer]':
+              - generic [ref=e412]: D-004
+              - generic [ref=e413]: "Confidence-based routing thresholds: four tiers"
+              - generic [ref=e414]:
+                - generic [ref=e415]: Approved
+                - generic [ref=e416]: Apr 24, 2026
+              - generic [ref=e417]: ▼
+            - generic:
+              - paragraph [ref=e418]: 0.95–1.0 = Accept/Excellent (auto-write to D365). 0.85–0.94 = recommend human review. 0.60–0.84 = route to manual review (safety margin). <0.60 = reject extraction, flag for manual entry.
+              - paragraph [ref=e419]:
+                - strong [ref=e420]: "Impact:"
+                - text: "Drives T044 (confidence routing logic) and Lizzie Stark's correction UI design (T058–T067). Human review SLA: 4 business hours for ReviewRequired forms. 4 business hours SLA must be staffed."
+              - paragraph [ref=e421]:
+                - text: "Made by:"
+                - strong [ref=e422]: Michael Gray
+                - text: "· Phase:"
+                - strong [ref=e423]: PH2
+          - region "Decision D-005" [ref=e424]:
+            - 'button "D-005 D365 write retry: MaxRetryCount=3, exponential backoff 60–300s (BR-D365WriteEvent-003) Pending May 17, 2026" [ref=e425] [cursor=pointer]':
+              - generic [ref=e426]: D-005
+              - generic [ref=e427]: "D365 write retry: MaxRetryCount=3, exponential backoff 60–300s (BR-D365WriteEvent-003)"
+              - generic [ref=e428]:
+                - generic [ref=e429]: Pending
+                - generic [ref=e430]: May 17, 2026
+              - generic [ref=e431]: ▼
+            - generic:
+              - paragraph [ref=e432]: "D365 transient failures require deterministic retry with bounded attempts. Business rule BR-D365WriteEvent-003 caps retries at 5 (schema max); implementation MaxRetryCount=3 per design lock Delta A. Retry schedule: 2m, 5m, 10m."
+              - paragraph [ref=e433]:
+                - strong [ref=e434]: "Impact:"
+                - text: "Retry logic is part of Delta A (MVP-04-D365-Retry), not yet built. Must be idempotent on FormSubmissionId+CorrelationId. Terminal failure → dead-letter target (target TBD: SP folder vs Dataverse table)."
+              - paragraph [ref=e435]:
+                - text: "Made by:"
+                - strong [ref=e436]: John Shelby
+                - text: "· Phase:"
+                - strong [ref=e437]: PH2
+          - region "Decision D-006" [ref=e438]:
+            - 'button "D-006 D365 instance: va-forms.crm.dynamics.com — Azure Commercial (assumption) Approved Apr 23, 2026" [ref=e439] [cursor=pointer]':
+              - generic [ref=e440]: D-006
+              - generic [ref=e441]: "D365 instance: va-forms.crm.dynamics.com — Azure Commercial (assumption)"
+              - generic [ref=e442]:
+                - generic [ref=e443]: Approved
+                - generic [ref=e444]: Apr 23, 2026
+              - generic [ref=e445]: ▼
+            - generic:
+              - paragraph [ref=e446]: "Alfie Solomons configured and verified VA-Form-D365-Prod connector (OAuth2, 2026-04-24). Connection test: list 1.2s/127 records, create 0.8s. Service account: d365.service.account@va-forms.onmicrosoft.com with System Administrator + D365 Business User roles."
+              - paragraph [ref=e447]:
+                - strong [ref=e448]: "Impact:"
+                - text: Assumes Azure Commercial (not GCC/GCC-High). If VA requires Government cloud, all connectors must be re-provisioned. Validate before Phase 2 deployment. Token expires every 24h (auto-refresh configured).
+              - paragraph [ref=e449]:
+                - text: "Made by:"
+                - strong [ref=e450]: Alfie Solomons
+                - text: "· Phase:"
+                - strong [ref=e451]: PH1
+      - region "Next 7-Day Action Plan" [ref=e452]:
+        - heading "Next 7-Day Action Plan" [level=2] [ref=e453]
+        - table "7-Day Action Plan" [ref=e456]:
+          - rowgroup [ref=e457]:
+            - row "Task Title Owner Due Priority Status Workstream" [ref=e458]:
+              - columnheader "Task" [ref=e459]
+              - columnheader "Title" [ref=e460]
+              - columnheader "Owner" [ref=e461]
+              - columnheader "Due" [ref=e462]
+              - columnheader "Priority" [ref=e463]
+              - columnheader "Status" [ref=e464]
+              - columnheader "Workstream" [ref=e465]
+          - rowgroup [ref=e466]:
+            - row "T001 Create / verify Power Platform environment (T001) Alfie Solomons Jun 3, 2026 Critical Open Platform Setup" [ref=e467]:
+              - cell "T001" [ref=e468]
+              - cell "Create / verify Power Platform environment (T001)" [ref=e469]
+              - cell "Alfie Solomons" [ref=e470]
+              - cell "Jun 3, 2026" [ref=e471]
+              - cell "Critical" [ref=e472]:
+                - generic [ref=e473]: Critical
+              - cell "Open" [ref=e474]:
+                - generic [ref=e475]: Open
+              - cell "Platform Setup" [ref=e476]
+            - row "T002-T003 Create SharePoint site /sites/VAFormProcessing and FormIntake library (T002–T003) Alfie Solomons Jun 3, 2026 Critical Open Platform Setup" [ref=e477]:
+              - cell "T002-T003" [ref=e478]
+              - cell "Create SharePoint site /sites/VAFormProcessing and FormIntake library (T002–T003)" [ref=e479]
+              - cell "Alfie Solomons" [ref=e480]
+              - cell "Jun 3, 2026" [ref=e481]
+              - cell "Critical" [ref=e482]:
+                - generic [ref=e483]: Critical
+              - cell "Open" [ref=e484]:
+                - generic [ref=e485]: Open
+              - cell "Platform Setup" [ref=e486]
+            - row "T005-T008 Verify connectors, create solution container, check AI Builder capacity, configure Entra ID (T005–T008) Alfie Solomons Jun 6, 2026 Critical Open Platform Setup" [ref=e487]:
+              - cell "T005-T008" [ref=e488]
+              - cell "Verify connectors, create solution container, check AI Builder capacity, configure Entra ID (T005–T008)" [ref=e489]
+              - cell "Alfie Solomons" [ref=e490]
+              - cell "Jun 6, 2026" [ref=e491]
+              - cell "Critical" [ref=e492]:
+                - generic [ref=e493]: Critical
+              - cell "Open" [ref=e494]:
+                - generic [ref=e495]: Open
+              - cell "Platform Setup" [ref=e496]
+            - 'row "PG-02 Tommy Shelby: complete architecture review and sign off Phase Gate PG-02 Tommy Shelby Jun 7, 2026 High Open Architecture" [ref=e497]':
+              - cell "PG-02" [ref=e498]
+              - 'cell "Tommy Shelby: complete architecture review and sign off Phase Gate PG-02" [ref=e499]'
+              - cell "Tommy Shelby" [ref=e500]
+              - cell "Jun 7, 2026" [ref=e501]
+              - cell "High" [ref=e502]:
+                - generic [ref=e503]: High
+              - cell "Open" [ref=e504]:
+                - generic [ref=e505]: Open
+              - cell "Architecture" [ref=e506]
+            - 'row "DLT-A Delta A: finalise MVP-04 Retry design — decide dead-letter target (SP folder vs Dataverse table) John Shelby Jun 5, 2026 High Open Power Automate" [ref=e507]':
+              - cell "DLT-A" [ref=e508]
+              - 'cell "Delta A: finalise MVP-04 Retry design — decide dead-letter target (SP folder vs Dataverse table)" [ref=e509]'
+              - cell "John Shelby" [ref=e510]
+              - cell "Jun 5, 2026" [ref=e511]
+              - cell "High" [ref=e512]:
+                - generic [ref=e513]: High
+              - cell "Open" [ref=e514]:
+                - generic [ref=e515]: Open
+              - cell "Power Automate" [ref=e516]
+            - 'row "DLT-B Delta B: lock Manual Review contract — agree Reject outcome (Correcting vs terminal Rejected) John Shelby Jun 6, 2026 High Open Power Automate" [ref=e517]':
+              - cell "DLT-B" [ref=e518]
+              - 'cell "Delta B: lock Manual Review contract — agree Reject outcome (Correcting vs terminal Rejected)" [ref=e519]'
+              - cell "John Shelby" [ref=e520]
+              - cell "Jun 6, 2026" [ref=e521]
+              - cell "High" [ref=e522]:
+                - generic [ref=e523]: High
+              - cell "Open" [ref=e524]:
+                - generic [ref=e525]: Open
+              - cell "Power Automate" [ref=e526]
+            - 'row "DLT-C Delta C: agree batch idempotency key (content hash, filename, or both) — John Shelby + Polly Gray Polly Gray Jun 6, 2026 Medium Open Data / Schema" [ref=e527]':
+              - cell "DLT-C" [ref=e528]
+              - 'cell "Delta C: agree batch idempotency key (content hash, filename, or both) — John Shelby + Polly Gray" [ref=e529]'
+              - cell "Polly Gray" [ref=e530]
+              - cell "Jun 6, 2026" [ref=e531]
+              - cell "Medium" [ref=e532]:
+                - generic [ref=e533]: Medium
+              - cell "Open" [ref=e534]:
+                - generic [ref=e535]: Open
+              - cell "Data / Schema" [ref=e536]
+            - row "T017 Begin collecting 40–50 annotated VA Form 10-3542 samples for AI Builder training (T017) Michael Gray Jun 7, 2026 Medium Open AI / ML" [ref=e537]:
+              - cell "T017" [ref=e538]
+              - cell "Begin collecting 40–50 annotated VA Form 10-3542 samples for AI Builder training (T017)" [ref=e539]
+              - cell "Michael Gray" [ref=e540]
+              - cell "Jun 7, 2026" [ref=e541]
+              - cell "Medium" [ref=e542]:
+                - generic [ref=e543]: Medium
+              - cell "Open" [ref=e544]:
+                - generic [ref=e545]: Open
+              - cell "AI / ML" [ref=e546]
+    - contentinfo [ref=e547]:
+      - generic [ref=e548]: StandardFederalFormnrocessing
+      - generic [ref=e549]: VA Form 10-3542 Extraction Pipeline · Dynamics 365 Web Resource
+      - generic [ref=e550]: Executive View

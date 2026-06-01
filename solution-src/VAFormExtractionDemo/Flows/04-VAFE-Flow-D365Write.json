@@ -37,7 +37,7 @@
         "vafe_status": "Pending",
         "vafe_write_date": "@{utcNow()}",
         "vafe_retry_count": 0,
-        "vafe_mapped_fields": "@{outputs('Get_ExtractionResult')?['body/vafe_extracted_fields']}"
+        "vafe_mapped_fields": "@{concat('{\"VeteranFirstName\":\"', string(coalesce(body('Parse_ExtractedFields_JSON')?['VeteranFirstName'], body('Parse_ExtractedFields_JSON')?['fields']?['VeteranFirstName']?['valueString'], '')), '\",\"VeteranLastName\":\"', string(coalesce(body('Parse_ExtractedFields_JSON')?['VeteranLastName'], body('Parse_ExtractedFields_JSON')?['fields']?['VeteranLastName']?['valueString'], '')), '\",\"totalAmountClaimed\":\"', string(coalesce(body('Parse_ExtractedFields_JSON')?['totalAmountClaimed'], body('Parse_ExtractedFields_JSON')?['fields']?['totalAmountClaimed']?['valueNumber'], body('Parse_ExtractedFields_JSON')?['fields']?['TotalAmountClaimed']?['valueNumber'], '')), '\",\"ExpenseA_Amount\":\"', string(coalesce(body('Parse_ExtractedFields_JSON')?['ExpenseA_Amount'], body('Parse_ExtractedFields_JSON')?['fields']?['ExpenseA_Amount']?['valueNumber'], '')), '\",\"ExpenseB_Amount\":\"', string(coalesce(body('Parse_ExtractedFields_JSON')?['ExpenseB_Amount'], body('Parse_ExtractedFields_JSON')?['fields']?['ExpenseB_Amount']?['valueNumber'], '')), '\",\"ExpenseC_Amount\":\"', string(coalesce(body('Parse_ExtractedFields_JSON')?['ExpenseC_Amount'], body('Parse_ExtractedFields_JSON')?['fields']?['ExpenseC_Amount']?['valueNumber'], '')), '\",\"ExpenseD_Amount\":\"', string(coalesce(body('Parse_ExtractedFields_JSON')?['ExpenseD_Amount'], body('Parse_ExtractedFields_JSON')?['fields']?['ExpenseD_Amount']?['valueNumber'], '')), '\"}')}"
       }
     },
     {
