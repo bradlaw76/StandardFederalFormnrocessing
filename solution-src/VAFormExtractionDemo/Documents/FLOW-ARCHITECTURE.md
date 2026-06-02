@@ -194,6 +194,36 @@ Every form submission gets a GUID correlation ID set in Flow 1. All AuditLog ent
 
 ---
 
+## 2026-06-02 Live Expense Mapping Patch
+
+This section captures live updates applied in the `VAFormExtractionDemo` solution to persist monetary fields.
+
+### Dataverse Table Fields (Extraction Result)
+
+Configured currency fields:
+1. Expense A Amount
+2. Expense B Amount
+3. Expense C Amount
+4. Expense D Amount
+5. Total Amount Claimed
+
+### Canonical Flow Mapping Points
+
+1. `MVP-05-AI-Extraction-Subflow`
+   - Action: `Create ExtractionResult`
+   - Maps expense A/B/C/D and total into Dataverse currency columns.
+2. `MVP-02-D365-Write-Subflow` (optional downstream write)
+   - Action: write/create target D365 record
+   - Uses same payload values when business table write-through is required.
+
+### Mapping Guidance
+
+1. Compose actions for expense fields are optional; direct expression mapping in `Create ExtractionResult` is supported and used.
+2. Total amount must use null-safe fallback logic when any expense line is blank.
+3. Blank all-expense scenarios should resolve to `null` for total, not zeroed string values.
+
+---
+
 ## Error Handling & Dead-Letter Queue (Issue #33)
 
 **Dead-letter queue:** SharePoint folder `FormIntake/FormIntakeErrors` (or list `FormIntakeErrors`) with columns/metadata:

@@ -7,18 +7,28 @@
 
 ## Active Version
 
-- **Version**: v2.0-design-lock
+- **Version**: v2.1-expense-mapping
 - **Status**: Active
 - **Primary document**: `docs/FLOW-DESIGN-BASELINE-LOCK.md`
 - **Starter guide**: `docs/V2-MODE2-STARTER.md`
 - **Execution scripts**: `solution-src/VAFormExtractionDemo/Scripts/v2/`
-- **Activation date**: 2026-05-18
+- **Activation date**: 2026-06-02
 
-All new design work must align to v2.0-design-lock unless explicitly superseded by a later version entry in this registry.
+Active version notes:
+1. Expense amount persistence normalized to Dataverse `Extraction Result` currency fields for A/B/C/D + total.
+2. Canonical live mapping points are `MVP-05-AI-Extraction-Subflow` (`Create ExtractionResult`) and optional downstream write in `MVP-02-D365-Write-Subflow`.
+3. Total amount mapping includes null-safe fallback behavior for blank line items.
+
+All new design work must align to v2.1-expense-mapping unless explicitly superseded by a later version entry in this registry.
 
 ---
 
 ## Prior Version (Reference Only)
+
+- **Version**: v2.0-design-lock
+- **Status**: Prior / reference only
+- **Documents**:
+  - `docs/FLOW-DESIGN-BASELINE-LOCK.md`
 
 - **Version**: v1.x-pre-lock
 - **Status**: Prior / reference only

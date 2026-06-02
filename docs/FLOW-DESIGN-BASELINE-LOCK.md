@@ -33,10 +33,21 @@ The following are treated as already implemented and validated unless runtime ev
 4. D365 write subflow executes and creates write-event records.
 5. Audit logger subflow executes and writes info-level entries.
 6. Safe baseline `D365PayloadJson` with `Unknown` defaults is intentional for current MVP and not a defect.
+7. ExtractionResult table includes currency columns for expense lines and totals: `Expense A Amount`, `Expense B Amount`, `Expense C Amount`, `Expense D Amount`, `Total Amount Claimed`.
+8. `MVP-05-AI-Extraction-Subflow` maps expense values directly into `Create ExtractionResult` (no required Compose intermediary).
+9. Total amount write path supports null-safe fallback behavior when one or more expense line values are blank.
 
 Evidence sources:
 - `solution-src/VAFormExtractionDemo/Flows/BUILD-SUMMARY-MAY-14-15.md`
 - `solution-src/VAFormExtractionDemo/Flows/MVP-POWER-AUTOMATE-BUILD-CHECKLIST.md`
+
+### 2026-06-02 Patch Note (Locked)
+
+Live Dataverse/table and flow updates were applied in `VAFormExtractionDemo` solution (Contact Center environment):
+
+1. Added/verified currency fields on `Extraction Result` for expense A/B/C/D and total claimed.
+2. Standardized expense mapping target to `MVP-05-AI-Extraction-Subflow` action `Create ExtractionResult`.
+3. Confirmed total-amount handling must be expression-based and null-safe when any expense input is blank.
 
 ---
 
